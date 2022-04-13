@@ -10,7 +10,8 @@ public class PetMovementation : MonoBehaviour
     public float speed;
     private Animator animator;
     [SerializeField] private Vector2 range;
-    private Vector2 targetPosition;
+    public Vector2 targetPosition;
+    public Action OnCloseToTargetCallback;
 
     private void Start()
     {
@@ -18,6 +19,11 @@ public class PetMovementation : MonoBehaviour
         targetPosition = GetNewTargetPosition();
     }
 
+
+    private void OnDisable()
+    {
+        GetComponent<Rigidbody2D>().velocity = new Vector2();
+    }
 
     private void Update()
     {
@@ -29,6 +35,7 @@ public class PetMovementation : MonoBehaviour
         else
         {
             Move(Vector2.zero, 0);
+            OnCloseToTargetCallback?.Invoke();
             targetPosition = GetNewTargetPosition();
         }
     }

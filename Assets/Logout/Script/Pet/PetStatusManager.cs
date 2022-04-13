@@ -9,7 +9,9 @@ public class PetStatusManager : MonoBehaviour
     [Header("Mood")]
     [SerializeField] private float radius;
     [SerializeField] private Slider m_slider;
-    private bool healthIsBeingUpdated = false;
+
+
+    private bool hungerIsBeingUpdated = false;
 
     //mood will be reduced, when pet is nerby bad things like empty food pot, dirty corner and else.
     public PetStatus status;
@@ -31,9 +33,9 @@ public class PetStatusManager : MonoBehaviour
         UpdateMoodSlider();
 
         //Handle Hunger status based in 
-        if (!healthIsBeingUpdated)
+        if (!hungerIsBeingUpdated)
         {
-            healthIsBeingUpdated = true;
+            hungerIsBeingUpdated = true;
             StartCoroutine(UpdateHunger());
         }
     }
@@ -41,8 +43,14 @@ public class PetStatusManager : MonoBehaviour
     private IEnumerator UpdateHunger()
     {
         yield return new WaitForSeconds(1f);
-        status.Hunger = GetHunger();
-        healthIsBeingUpdated = false;
+        
+        status.Hunger -= 1;
+        if (status.Hunger < 50)
+        {
+            status.OnHungerCallback?.Invoke();
+        }
+
+        hungerIsBeingUpdated = false;
     }
 
     private void UpdateMoodSlider()
@@ -77,15 +85,6 @@ public class PetStatusManager : MonoBehaviour
         return mood;
     }
 
-    public float GetHunger()
-    {
-        return status.Hunger - 1;
-    }
-
-    public void AddHunger(float value)
-    {
-        status.Hunger += value;
-    }
 }
 
 [System.Serializable]
@@ -93,4 +92,5 @@ public class PetStatus
 {
     public float Mood;
     public float Hunger;
+    public Action OnHungerCallback;
 }
