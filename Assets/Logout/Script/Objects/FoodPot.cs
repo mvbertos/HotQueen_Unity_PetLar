@@ -5,19 +5,20 @@ using UnityEngine;
 
 public class FoodPot : MonoBehaviour
 {
-    public float food_amout { private set; get; }
-
+    private float current_food_amount = 0;
+    [SerializeField] private float maxFood = 10;
+    [SerializeField] private float hungerRegen = 10;
 
     public void FillPot()
     {
-        if (GameManager._ong.food >= 10)
+        if (GameManager._ong.food >= maxFood)
         {
-            food_amout = 10;
-            GameManager._ong.food -= 10;
+            current_food_amount = 10;
+            GameManager._ong.food -= maxFood;
         }
-        else if (GameManager._ong.food > 0 && GameManager._ong.food <= 10)
+        else if (GameManager._ong.food > 0 && GameManager._ong.food <= maxFood)
         {
-            food_amout = GameManager._ong.food;
+            current_food_amount = GameManager._ong.food;
             GameManager._ong.food = 0;
         }
         else
@@ -30,8 +31,42 @@ public class FoodPot : MonoBehaviour
         renderer.color = Color.green;
     }
 
-    public void UsePot()
+    public bool IsEmpty()
     {
-        food_amout -= 1;
+        return current_food_amount == 0;
+    }
+    public bool IsFull()
+    {
+        return current_food_amount == maxFood;
+    }
+    public float UsePot()
+    {
+        float regen = 0;
+
+        if (!IsEmpty())
+        {
+            current_food_amount -= 1;
+            regen = hungerRegen;
+        }
+
+        UpdateSprite();
+        return regen; ;
+    }
+
+    private void UpdateSprite()
+    {
+        SpriteRenderer _spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
+        if (IsEmpty())
+        {
+            _spriteRenderer.color = Color.red;
+        }
+        else if (IsFull())
+        {
+            _spriteRenderer.color = Color.green;
+        }
+        else
+        {
+            _spriteRenderer.color = Color.yellow;
+        }
     }
 }

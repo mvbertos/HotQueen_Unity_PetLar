@@ -10,27 +10,22 @@ public class PetMovementation : MonoBehaviour
     public float speed;
     private Animator animator;
     [SerializeField] private Vector2 range;
-    public Vector2 targetPosition;
+    private Vector2 targetPosition;
     public Action OnCloseToTargetCallback;
-
     private void Start()
     {
         animator = GetComponent<Animator>();
         targetPosition = GetNewTargetPosition();
     }
-
-
     private void OnDisable()
     {
         GetComponent<Rigidbody2D>().velocity = new Vector2();
     }
-
     private void Update()
     {
-        if (Vector2.Distance((Vector2)this.transform.position, targetPosition) > 0.1)
+        if (Vector2.Distance((Vector2)this.transform.position, targetPosition) > 0.1f)
         {
-            Vector2 direction = (targetPosition - (Vector2)this.transform.position).normalized;
-            Move(direction, speed);
+            Move(PetLarUtils.GetDirection(this.transform.position, targetPosition), speed);
         }
         else
         {
@@ -42,14 +37,15 @@ public class PetMovementation : MonoBehaviour
 
     private Vector2 GetNewTargetPosition()
     {
-        return GetRandomPosition();
+        return PetLarUtils.GetRandomPosition(Vector2.zero, range);
     }
 
-    private Vector2 GetRandomPosition()
+
+
+    public void SetNewTargetPosition(Vector3 value)
     {
-        return new Vector2(Random.Range(0, range.x), Random.Range(0, range.y));
+        targetPosition = value;
     }
-
     public void Move(Vector3 direction, float speed)
     {
         direction.Normalize();
@@ -76,4 +72,3 @@ public class PetMovementation : MonoBehaviour
         GetComponent<Rigidbody2D>().velocity = speed * direction;
     }
 }
-

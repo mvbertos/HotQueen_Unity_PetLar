@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BarStatus : MonoBehaviour
+public class StatusBar : MonoBehaviour
 {
     [SerializeField] private Slider mood_slider, energy_slider, food_slider;
 

@@ -8,42 +8,32 @@ public class PetStatusManager : MonoBehaviour
 {
     [Header("Mood")]
     [SerializeField] private float radius;
-    [SerializeField] private Slider m_slider;
-
-
     private bool hungerIsBeingUpdated = false;
 
     //mood will be reduced, when pet is nerby bad things like empty food pot, dirty corner and else.
-    public PetStatus status;
+    public PetStatus status { private set; get; }
     private PetStatus maxStatus;
 
-
+    private void Awake()
+    {
+        status = new PetStatus(100, 60);
+        maxStatus = new PetStatus(status.Hunger, status.Mood);
+    }
     private void Start()
     {
-        //initialize maxstatus
-        maxStatus = new PetStatus();
-        maxStatus.Mood = status.Mood;
-        maxStatus.Hunger = status.Hunger;
+        //Handle Hunger status based in 
+        PetLarUtils.LoopTimerEvent(UpdateHunger, 1, "UpdateHunger");
     }
 
     private void Update()
     {
         //Handle mood status
-        status.Mood = GetMood(this.transform.position, radius, maxStatus.Mood);
-        UpdateMoodSlider();
-
-        //Handle Hunger status based in 
-        if (!hungerIsBeingUpdated)
-        {
-            hungerIsBeingUpdated = true;
-            StartCoroutine(UpdateHunger());
-        }
+        status.Mood = UpdateMood(this.transform.position, radius, maxStatus.Mood);
+        Debug.Log(status.Hunger);
     }
 
-    private IEnumerator UpdateHunger()
+    private void UpdateHunger()
     {
-        yield return new WaitForSeconds(1f);
-        
         status.Hunger -= 1;
         if (status.Hunger < 50)
         {
@@ -53,24 +43,16 @@ public class PetStatusManager : MonoBehaviour
         hungerIsBeingUpdated = false;
     }
 
-    private void UpdateMoodSlider()
-    {
-        float newMood = status.Mood / maxStatus.Mood;
-        if (m_slider)
-        {
-            if (newMood <= 0)
-            {
-                m_slider.value = 0;
-            }
-            else
-            {
-                m_slider.value = newMood;
-            }
-        }
-    }
-
     //Handle status
-    public float GetMood(Vector3 origin, float radius, float maxValue)
+    /// <summary>
+    /// Calculates the mood by verifying if there is dislikeble object around 
+    /// or the pets hunger is too low
+    /// </summary>
+    /// <param name="origin"></param>
+    /// <param name="radius"></param>
+    /// <param name="maxValue"></param>
+    /// <returns></returns>
+    private float UpdateMood(Vector3 origin, float radius, float maxValue)
     {
         float mood = maxValue;
 
@@ -82,6 +64,8 @@ public class PetStatusManager : MonoBehaviour
                 mood -= _object.MoodEffect;
             }
         }
+
+        //todo: lower the mood if hunger is below 50%
         return mood;
     }
 
@@ -93,4 +77,10 @@ public class PetStatus
     public float Mood;
     public float Hunger;
     public Action OnHungerCallback;
+
+    public PetStatus(float mood, float hunger)
+    {
+        Mood = mood;
+        Hunger = hunger;
+    }
 }
