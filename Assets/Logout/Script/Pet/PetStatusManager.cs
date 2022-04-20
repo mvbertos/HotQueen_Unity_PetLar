@@ -8,11 +8,11 @@ public class PetStatusManager : MonoBehaviour
 {
     [Header("Mood")]
     [SerializeField] private float radius;
-    private bool hungerIsBeingUpdated = false;
 
     //mood will be reduced, when pet is nerby bad things like empty food pot, dirty corner and else.
     public PetStatus status { private set; get; }
     private PetStatus maxStatus;
+    public Action OnHungerCallback;
 
     private void Awake()
     {
@@ -29,7 +29,7 @@ public class PetStatusManager : MonoBehaviour
     {
         //Handle mood status
         status.Mood = UpdateMood(this.transform.position, radius, maxStatus.Mood);
-        Debug.Log(status.Hunger);
+
     }
 
     private void UpdateHunger()
@@ -37,10 +37,10 @@ public class PetStatusManager : MonoBehaviour
         status.Hunger -= 1;
         if (status.Hunger < 50)
         {
-            status.OnHungerCallback?.Invoke();
+            OnHungerCallback?.Invoke();
         }
 
-        hungerIsBeingUpdated = false;
+        Debug.Log(status.Hunger);
     }
 
     //Handle status
@@ -76,7 +76,6 @@ public class PetStatus
 {
     public float Mood;
     public float Hunger;
-    public Action OnHungerCallback;
 
     public PetStatus(float mood, float hunger)
     {

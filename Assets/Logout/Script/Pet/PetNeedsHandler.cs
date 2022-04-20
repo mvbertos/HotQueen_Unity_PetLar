@@ -12,7 +12,7 @@ public class PetNeedsHandler : MonoBehaviour
 
     private void Start()
     {
-        _pet_status_manager.status.OnHungerCallback += LookForFood;
+        _pet_status_manager.OnHungerCallback += LookForFood;
     }
     private void LookForFood()
     {
@@ -27,11 +27,10 @@ public class PetNeedsHandler : MonoBehaviour
     private void usePot()
     {
         RaycastHit2D hit = Physics2D.CircleCast(this.transform.position, 2, this.transform.right, 1, food_layerMask);
-        if (hit && hit.rigidbody.TryGetComponent<FoodPot>(out FoodPot foodPot))
+        if (hit && hit.collider.TryGetComponent<FoodPot>(out FoodPot foodPot))
         {
             _pet_status_manager.status.Hunger += foodPot.UsePot();
         }
-        _pet_movementation.OnCloseToTargetCallback -= usePot;
     }
 
     private Transform ClosestFoodPot()
@@ -41,18 +40,6 @@ public class PetNeedsHandler : MonoBehaviour
 
         if (foodPot_list.Count > 0)
         {
-            // while (!closestpot)
-            // {
-
-            //     // if (pot.IsEmpty())
-            //     // {
-            //     //     foodPot_list.Remove(pot);
-            //     // }
-            //     // else
-            //     // {
-            //     //     closestpot = pot.transform;
-            //     // }
-            // }
             return PetLarUtils.Complex<FoodPot>.ClosestObject(this.transform, foodPot_list.ToArray(), verification).transform;
         }
         return null;

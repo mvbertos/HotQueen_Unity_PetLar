@@ -41,6 +41,7 @@ public class FoodPot : MonoBehaviour
     }
     public float UsePot()
     {
+        Debug.Log("Pot´s being used");
         float regen = 0;
 
         if (!IsEmpty())
@@ -50,7 +51,7 @@ public class FoodPot : MonoBehaviour
         }
 
         UpdateSprite();
-        return regen; ;
+        return regen;
     }
 
     private void UpdateSprite()

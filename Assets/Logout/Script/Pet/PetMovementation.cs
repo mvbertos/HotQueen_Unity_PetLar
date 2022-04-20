@@ -31,6 +31,7 @@ public class PetMovementation : MonoBehaviour
         {
             Move(Vector2.zero, 0);
             OnCloseToTargetCallback?.Invoke();
+            OnCloseToTargetCallback = null;
             targetPosition = GetNewTargetPosition();
         }
     }
