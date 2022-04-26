@@ -47,6 +47,10 @@ public class PetNeedsHandler : MonoBehaviour
 
     private bool verification(FoodPot reference)
     {
-        return !reference.IsEmpty();
+        if (reference)
+        {
+            return !reference.IsEmpty();
+        }
+        return false;
     }
 }

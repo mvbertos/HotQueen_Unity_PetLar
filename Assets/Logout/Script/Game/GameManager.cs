@@ -6,16 +6,16 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    
+
     public class ONG
     {
         public float MAX_VALUE = 100;
-        public float mood, food, energy;
+        public float mood, food, money;
         public ONG()
         {
             this.mood = MAX_VALUE;
             this.food = MAX_VALUE;
-            this.energy = MAX_VALUE;
+            this.money = 1000;
         }
     }
 
@@ -24,39 +24,25 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _ong = new ONG();
-        StartEnergyLoop();
     }
     private void Update()
     {
         _ong.mood = GetGeneralMood();
     }
 
-    //Energy infinte loop to reduce value
-    private void StartEnergyLoop()
-    {
-        TimerEvent.Create(() => { EnergyLoop(); }, 1);
-    }
-
-    private void EnergyLoop()
-    {
-        _ong.energy = _ong.energy - 1;
-        TimerEvent.Create(() => { EnergyLoop(); }, 1);
-    }
-
     //return media from all the pets in the game
     private float GetGeneralMood()
     {
-        int count = 0;
         float moodCount = 0;
 
-        foreach (PetStatusManager item in FindObjectsOfType<PetStatusManager>())
+        PetStatusManager[] petsList = FindObjectsOfType<PetStatusManager>();
+        foreach (PetStatusManager item in petsList)
         {
-            count += 1;
             moodCount += item.status.Mood;
         }
 
-        //MoodBar
-        float moodMedia = moodCount / count;
+        float moodMedia = moodCount / petsList.Length;
+        Debug.Log(moodCount);
         return moodMedia;
     }
 }
