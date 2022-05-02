@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
 
     public class ONG
     {
@@ -19,7 +20,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public MouseRole mouseRole = 0;
+
     public static ONG _ong { private set; get; }
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     void Start()
     {
@@ -42,7 +50,11 @@ public class GameManager : MonoBehaviour
         }
 
         float moodMedia = moodCount / petsList.Length;
-        Debug.Log(moodCount);
         return moodMedia;
     }
+}
+public enum MouseRole
+{
+    Drag,
+    Trigger,
 }

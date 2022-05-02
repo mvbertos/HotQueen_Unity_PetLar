@@ -54,7 +54,7 @@ public class PetLarUtils : MonoBehaviour
         }
         public static ComplexType ClosestObject(Transform origin, ComplexType[] targets, ComplexDelegate extra_condition)
         {
-            ComplexType closestSpot = null;
+            ComplexType closestSpot = default(ComplexType);
             foreach (ComplexType item in targets)
             {
                 if (extra_condition(item))

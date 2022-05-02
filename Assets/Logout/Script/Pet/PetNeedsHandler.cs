@@ -20,8 +20,11 @@ public class PetNeedsHandler : MonoBehaviour
 
         //return if is null
         Debug.Log("looking for food");
-        _pet_movementation.SetNewTargetPosition(target.position);
-        _pet_movementation.OnCloseToTargetCallback += usePot;
+        if (target)
+        {
+            _pet_movementation.SetNewTargetPosition(target.position);
+            _pet_movementation.OnCloseToTargetCallback += usePot;
+        }
     }
 
     private void usePot()
@@ -36,11 +39,13 @@ public class PetNeedsHandler : MonoBehaviour
     private Transform ClosestFoodPot()
     {
         List<FoodPot> foodPot_list = new List<FoodPot>(FindObjectsOfType<FoodPot>());
+
         //Transform closestpot = null;
 
         if (foodPot_list.Count > 0)
         {
-            return PetLarUtils.Complex<FoodPot>.ClosestObject(this.transform, foodPot_list.ToArray(), verification).transform;
+            FoodPot pot = PetLarUtils.Complex<FoodPot>.ClosestObject(this.transform, foodPot_list.ToArray(), verification);
+            return pot != null ? pot.transform : null;
         }
         return null;
     }
