@@ -7334,6 +7334,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 41245127816401537, guid: 68c3f92be8c5db845a873964febe4dd8,
         type: 3}
+      propertyPath: perfil.Name
+      value: Nermal
+      objectReference: {fileID: 0}
+    - target: {fileID: 41245127816401537, guid: 68c3f92be8c5db845a873964febe4dd8,
+        type: 3}
       propertyPath: status.Mood
       value: 51
       objectReference: {fileID: 0}
@@ -7341,6 +7346,17 @@ PrefabInstance:
         type: 3}
       propertyPath: status.Hunger
       value: 51
+      objectReference: {fileID: 0}
+    - target: {fileID: 41245127816401537, guid: 68c3f92be8c5db845a873964febe4dd8,
+        type: 3}
+      propertyPath: perfil.Picture
+      value: 
+      objectReference: {fileID: 21300000, guid: ec47f75fe8aff1644ac73998f4ad31b5,
+        type: 3}
+    - target: {fileID: 41245127816401537, guid: 68c3f92be8c5db845a873964febe4dd8,
+        type: 3}
+      propertyPath: perfil.Personality
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 41245127816401549, guid: 68c3f92be8c5db845a873964febe4dd8,
         type: 3}

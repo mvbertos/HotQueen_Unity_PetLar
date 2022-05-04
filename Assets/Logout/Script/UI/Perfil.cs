@@ -12,7 +12,7 @@ public class Perfil : MonoBehaviour
 
         public string Name;
         public Sprite Picture;
-        public string Personality;
+        public Personality Personality;
     }
 
     [SerializeField] private TMP_Text text_name;
@@ -25,7 +25,7 @@ public class Perfil : MonoBehaviour
     {
         text_name.text = current_data.Name;
         image_userImage.sprite = current_data.Picture;
-        text_personality.text = current_data.Personality;
+        text_personality.text = current_data.Personality.ToString();
     }
     private void OnDisable()
     {

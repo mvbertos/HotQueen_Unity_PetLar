@@ -12,6 +12,9 @@ public class PetStatusManager : MonoBehaviour
     //mood will be reduced, when pet is nerby bad things like empty food pot, dirty corner and else.
     public PetStatus status { private set; get; }
     private PetStatus maxStatus;
+
+    //personality
+    public Perfil.Data perfil = new Perfil.Data();
     public Action OnHungerCallback;
 
     private void Awake()
@@ -82,4 +85,10 @@ public class PetStatus
         Mood = mood;
         Hunger = hunger;
     }
+}
+
+public enum Personality
+{
+    Playfull,
+    Angry,
 }

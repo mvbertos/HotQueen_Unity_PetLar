@@ -858,7 +858,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6592874725188922412}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5220414401397503273}
+        m_TargetAssemblyTypeName: MG_Adoption, Assembly-CSharp
+        m_MethodName: Adopt
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4036648001199743468
 GameObject:
   m_ObjectHideFlags: 0
@@ -1347,7 +1359,7 @@ MonoBehaviour:
   current_data:
     Name: 
     Picture: {fileID: 0}
-    Personality: 
+    Personality: 0
 --- !u!1 &5437523878582430433
 GameObject:
   m_ObjectHideFlags: 0
@@ -1469,10 +1481,10 @@ MonoBehaviour:
   newData:
   - Name: Garfield
     Picture: {fileID: 21300010, guid: 9f8f114589864b6489859a58fbb6baf9, type: 3}
-    Personality: Lazy
+    Personality: 0
   - Name: Nermal
     Picture: {fileID: 21300000, guid: c1e3ad24eb3ae324c872dce9286c357d, type: 3}
-    Personality: Playfull
+    Personality: 0
   perfil_pet: {fileID: 3545388478498588542}
   perfil_human: {fileID: 882454452434944658}
 --- !u!1 &5652575278586017816
@@ -1634,7 +1646,7 @@ MonoBehaviour:
   current_data:
     Name: 
     Picture: {fileID: 0}
-    Personality: 
+    Personality: 0
 --- !u!1 &8991348187173174473
 GameObject:
   m_ObjectHideFlags: 0
@@ -1755,4 +1767,16 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7580081502865742999}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5220414401397503273}
+        m_TargetAssemblyTypeName: MG_Adoption, Assembly-CSharp
+        m_MethodName: Reject
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
