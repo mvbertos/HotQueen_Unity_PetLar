@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-
+    [SerializeField] private PetStatusManager[] petList;
+    public static PetStatusManager[] PetList;
     public class ONG
     {
         public float MAX_VALUE = 100;
@@ -26,17 +27,33 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        _ong = new ONG();
         instance = this;
     }
 
-    void Start()
+    private void Start()
     {
-        _ong = new ONG();
+        PetList = petList;
     }
+
     private void Update()
     {
         _ong.mood = GetGeneralMood();
     }
+
+    #region PET HANDLER
+    public static void AddNewPetToWorld(String name, String species, EntityData.Personalities personalities)
+    {
+        EntityData data = new EntityData();
+        data.Name = name;
+        data.Personality = personalities;
+        data.Picture = PetList[0].petPerfil.Picture;
+
+        PetStatusManager newpet = Instantiate<PetStatusManager>(PetList[0]);
+        newpet.petPerfil = data;
+    }
+    #endregion
+    #region STATUS HANDLER
 
     //return media from all the pets in the game
     private float GetGeneralMood()
@@ -52,6 +69,8 @@ public class GameManager : MonoBehaviour
         float moodMedia = moodCount / petsList.Length;
         return moodMedia;
     }
+
+    #endregion
 }
 public enum MouseRole
 {

@@ -23,7 +23,7 @@ public class PlayerMouse : MonoBehaviour
         OnMouseLeftDown += () =>
         {
             //set cursor sprite to hold
-            Cursor.SetCursor(SpriteToTexture2D(mouseSprite.holdMouseSprite), new Vector2(0, 0), CursorMode.ForceSoftware);
+            //Cursor.SetCursor(SpriteToTexture2D(mouseSprite.holdMouseSprite), new Vector2(0, 0), CursorMode.ForceSoftware);
 
             //cast ray to find a interactable gameobject
             Ray mousePosition = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -54,7 +54,7 @@ public class PlayerMouse : MonoBehaviour
         OnMouseRightDown += () =>
         {
             //set cursor sprite to hold
-            Cursor.SetCursor(SpriteToTexture2D(mouseSprite.holdMouseSprite), new Vector2(0, 0), CursorMode.ForceSoftware);
+            // Cursor.SetCursor(SpriteToTexture2D(mouseSprite.holdMouseSprite), new Vector2(0, 0), CursorMode.ForceSoftware);
 
             if (objectBeingInteracted)
             {
@@ -64,7 +64,7 @@ public class PlayerMouse : MonoBehaviour
 
         OnMouseLeftUp += () =>
         {
-            Cursor.SetCursor(SpriteToTexture2D(mouseSprite.mouseSprite), new Vector2(0, 0), CursorMode.ForceSoftware);
+            // Cursor.SetCursor(SpriteToTexture2D(mouseSprite.mouseSprite), new Vector2(0, 0), CursorMode.ForceSoftware);
 
             if (objectBeingInteracted)
                 ReleaseObject(objectBeingInteracted.transform.name, objectBeingInteracted);
@@ -72,7 +72,7 @@ public class PlayerMouse : MonoBehaviour
 
         OnMouseRightUp += () =>
         {
-            Cursor.SetCursor(SpriteToTexture2D(mouseSprite.mouseSprite), new Vector2(0, 0), CursorMode.ForceSoftware);
+            //Cursor.SetCursor(SpriteToTexture2D(mouseSprite.mouseSprite), new Vector2(0, 0), CursorMode.ForceSoftware);
         };
 
     }

@@ -308,7 +308,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   range: {x: 15, y: 9}
-  targetPosition: {x: 0, y: 0}
 --- !u!114 &41245127816401537
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,11 +320,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c2ed17254553594da730ab199c17dd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 2
-  m_slider: {fileID: 5658830759100841550}
-  status:
-    Mood: 100
-    Hunger: 100
+  radius: 1
+  petPerfil:
+    Name: Nermal
+    Picture: {fileID: 21300000, guid: ec47f75fe8aff1644ac73998f4ad31b5, type: 3}
+    Personality: 2
 --- !u!114 &990243016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,6 +337,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3fa2658caf5df6419c3d3b2a26c0a10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _petMovementation: {fileID: 41245127816401550}
+  _petStatusManager: {fileID: 41245127816401537}
 --- !u!114 &6364446130106071276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -352,6 +353,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pet_status_manager: {fileID: 41245127816401537}
   _pet_movementation: {fileID: 41245127816401550}
+  food_layerMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &41245128436227923
 GameObject:
   m_ObjectHideFlags: 0

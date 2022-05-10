@@ -13,6 +13,7 @@ public class PetStatusManager : MonoBehaviour
     public PetStatus status { private set; get; }
     private PetStatus maxStatus;
     public Action OnHungerCallback;
+    public EntityData petPerfil;
 
     private void Awake()
     {
@@ -39,8 +40,6 @@ public class PetStatusManager : MonoBehaviour
         {
             OnHungerCallback?.Invoke();
         }
-
-        Debug.Log(status.Hunger);
     }
 
     //Handle status

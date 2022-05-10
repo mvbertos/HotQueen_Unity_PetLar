@@ -19,7 +19,6 @@ public class PetNeedsHandler : MonoBehaviour
         Transform target = ClosestFoodPot();
 
         //return if is null
-        Debug.Log("looking for food");
         if (target)
         {
             _pet_movementation.SetNewTargetPosition(target.position);

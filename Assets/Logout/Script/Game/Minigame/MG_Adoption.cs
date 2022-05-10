@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class MG_Adoption : MonoBehaviour
 {
     [SerializeField] private Button QuitButton;
-    [SerializeField] private Perfil.Data[] newData = new Perfil.Data[2];
+    [SerializeField] private EntityData[] newData = new EntityData[2];
     [SerializeField] private Perfil perfil_pet;
     [SerializeField] private Perfil perfil_human;
 
