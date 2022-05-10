@@ -33,7 +33,7 @@ public class MG_Adoption : MonoBehaviour
 
 
             //create new data to the first pet in the list
-            Perfil.Data new_data = new Perfil.Data();
+            EntityData new_data = new EntityData();
             new_data = adoption.perfil;
 
             //apply into petfil_pet

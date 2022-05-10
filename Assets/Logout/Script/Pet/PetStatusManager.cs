@@ -14,7 +14,7 @@ public class PetStatusManager : MonoBehaviour
     private PetStatus maxStatus;
 
     //personality
-    public Perfil.Data perfil = new Perfil.Data();
+    public EntityData perfil = new EntityData();
     public Action OnHungerCallback;
     public EntityData petPerfil;
 
