@@ -21,8 +21,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public MouseRole mouseRole = 0;
-
     public static ONG _ong { private set; get; }
 
     private void Awake()
@@ -71,9 +69,4 @@ public class GameManager : MonoBehaviour
     }
 
     #endregion
-}
-public enum MouseRole
-{
-    Drag,
-    Trigger,
 }

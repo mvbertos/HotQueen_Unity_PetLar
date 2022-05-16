@@ -1,0 +1,142 @@
+{
+    "name": "WindowsInputs",
+    "maps": [
+        {
+            "name": "Player Controls",
+            "id": "3cdbf838-1537-4dce-b77d-091c91326c4f",
+            "actions": [
+                {
+                    "name": "Shortcuts",
+                    "type": "Value",
+                    "id": "972d29a0-057b-4dac-8cfe-c68d38522069",
+                    "expectedControlType": "Integer",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Mouse",
+                    "type": "Value",
+                    "id": "5709688f-26e4-4784-8994-a0ee58662ecc",
+                    "expectedControlType": "Integer",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "09b01b10-7862-4195-a5b5-6e7afbe08a5d",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "Scale",
+                    "groups": "",
+                    "action": "Shortcuts",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "651449c7-c9b9-41bc-b0a1-8f1e4ab0dcc5",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "Scale(factor=2)",
+                    "groups": "",
+                    "action": "Shortcuts",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "87ff90ec-e55f-4194-9fb7-06fb5a6c729d",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "Scale(factor=3)",
+                    "groups": "",
+                    "action": "Shortcuts",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d2da8e43-464c-4a16-9975-6253465d8c14",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "Scale(factor=4)",
+                    "groups": "",
+                    "action": "Shortcuts",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5bf0e377-a56a-4da1-b282-ba6adf65922d",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "Scale(factor=5)",
+                    "groups": "",
+                    "action": "Shortcuts",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "651acd0d-5665-4af4-9f1f-0fc83ddd5e4f",
+                    "path": "<Keyboard>/y",
+                    "interactions": "",
+                    "processors": "Scale(factor=6)",
+                    "groups": "",
+                    "action": "Shortcuts",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "723750ee-c397-49a2-a1d1-839025ccd6ea",
+                    "path": "<Keyboard>/u",
+                    "interactions": "",
+                    "processors": "Scale(factor=7)",
+                    "groups": "",
+                    "action": "Shortcuts",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3196ded2-6cbe-446f-81c3-b42bba88ee2a",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "Scale(factor=8)",
+                    "groups": "",
+                    "action": "Shortcuts",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4d9b48e8-e542-421b-a721-ad60f53b4336",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "Scale(factor=0)",
+                    "groups": "",
+                    "action": "Mouse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e26ba16e-0f16-4582-a3ac-7e88497e4ef2",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "Scale",
+                    "groups": "",
+                    "action": "Mouse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

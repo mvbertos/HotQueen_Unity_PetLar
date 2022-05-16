@@ -18,10 +18,18 @@ public class MinigameScreen : MonoBehaviour
 
     private void OnEnable()
     {
-        InitMinigamesButton();
+        InitButtons();
     }
 
     private void OnDisable()
+    {
+        ClearButtons();
+    }
+
+    /// <summary>
+    /// It clears buttons child of content
+    /// </summary>
+    private void ClearButtons()
     {
         foreach (Transform item in content)
         {
@@ -29,7 +37,10 @@ public class MinigameScreen : MonoBehaviour
         }
     }
 
-    private void InitMinigamesButton()
+    /// <summary>
+    /// Init buttons to trigger the minigames when later pressed
+    /// </summary>
+    private void InitButtons()
     {
         //Init Pet Adoption button
         Button button = Instantiate(button_ref, content);

@@ -14,6 +14,12 @@ public class PetNeedsHandler : MonoBehaviour
     {
         _pet_status_manager.OnHungerCallback += LookForFood;
     }
+
+    private void OnDestroy()
+    {
+        _pet_status_manager.OnHungerCallback -= LookForFood;
+    }
+
     private void LookForFood()
     {
         Transform target = ClosestFoodPot();
