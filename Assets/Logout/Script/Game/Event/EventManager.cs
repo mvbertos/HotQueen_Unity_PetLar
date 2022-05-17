@@ -8,7 +8,7 @@ public class EventManager : MonoBehaviour
 
     List<Event> events = new List<Event>();
     public EventInterfaceManager eventInterface;
-    public PetStatusManager pet;
+    public Pet pet;
 
     private void Start()
     {

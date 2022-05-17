@@ -24,8 +24,8 @@ public class Event
 }
 public class Adoption : Event
 {
-    PetStatusManager pet_reference;
-    public Adoption(PetStatusManager petReference)
+    Pet pet_reference;
+    public Adoption(Pet petReference)
     {
         pet_reference = petReference;
         //Set event_sprite as it´s appearance
@@ -38,7 +38,7 @@ public class Adoption : Event
     public void Adopt()
     {
         //instantiate a pet prefab
-        GameManager.AddNewPetToWorld(pet_reference.petPerfil.Name, "null", EntityData.Personalities.Playfull);
+        GameManager.AddNewPetToWorld(pet_reference.petPerfil.Name, pet_reference.petPerfil.Picture, EntityData.Personalities.Playfull);
     }
 
     public override void ConfirmEvent()

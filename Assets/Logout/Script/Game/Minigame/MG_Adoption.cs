@@ -9,30 +9,40 @@ public class MG_Adoption : MonoBehaviour
     [SerializeField] private EntityData[] newData = new EntityData[2];
     [SerializeField] private Perfil perfil_pet;
     [SerializeField] private Perfil perfil_human;
-    private List<PetStatusManager> petList = new List<PetStatusManager>();
-    private PetStatusManager adoption;
+    private List<Pet> petList = new List<Pet>();
+    private Pet adoption;
 
     private void Start()
     {
         QuitButton.onClick.AddListener(delegate { Destroy(this.gameObject); });
-
-
     }
 
 
     private void OnEnable()
     {
-        petList = FindObjectsOfType<PetStatusManager>().ToList();
+        //SETUP MINIGAME
+        InitMinigame();
+    }
+
+    /// <summary>
+    /// pick a random pet in the ong and put in the minigame to be adopted
+    /// </summary>
+    private void InitMinigame()
+    {
+        //create a list of pets found in the scene
+        petList = FindObjectsOfType<Pet>().ToList();
 
         if (petList.Count > 0)
         {
-            PetStatusManager[] petarray = petList.ToArray();
-            adoption = petarray[0];
+            //get a random pet in the list
+            Pet[] petarray = petList.ToArray();
+            adoption = petarray[Random.Range(0, petarray.Length)];
 
 
+            //put it in adoption
             //create new data to the first pet in the list
             EntityData new_data = new EntityData();
-            new_data = adoption.perfil;
+            new_data = adoption.petPerfil;
 
             //apply into petfil_pet
             perfil_human.current_data = newData[0];
@@ -44,6 +54,9 @@ public class MG_Adoption : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// it confirm the adoption
+    /// </summary>
     public void Adopt()
     {
         //get pet to bet adopted
@@ -51,6 +64,10 @@ public class MG_Adoption : MonoBehaviour
         Destroy(adoption.gameObject);
         Destroy(this.gameObject);
     }
+
+    /// <summary>
+    /// refuse adoption
+    /// </summary>
     public void Reject()
     {
         Destroy(this.gameObject);

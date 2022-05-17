@@ -14,15 +14,13 @@ public class PetStatusManager : MonoBehaviour
     private PetStatus maxStatus;
 
     //personality
-    public EntityData perfil = new EntityData();
     public Action OnHungerCallback;
-    public EntityData petPerfil;
 
     private void Awake()
     {
-        status = new PetStatus(100, 60);
-        maxStatus = new PetStatus(status.Hunger, status.Mood);
+        InitStatus();
     }
+
     private void Start()
     {
         //Handle Hunger status based in 
@@ -35,6 +33,14 @@ public class PetStatusManager : MonoBehaviour
         status.Mood = UpdateMood(this.transform.position, radius, maxStatus.Mood);
 
     }
+
+    private void InitStatus()
+    {
+        //Health and Stuff
+        status = new PetStatus(100, 60);
+        maxStatus = new PetStatus(status.Hunger, status.Mood);
+    }
+
 
     private void UpdateHunger()
     {

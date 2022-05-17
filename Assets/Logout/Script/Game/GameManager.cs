@@ -7,8 +7,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    [SerializeField] private PetStatusManager[] petList;
-    public static PetStatusManager[] PetList;
+    public static Pet[] PetArray;
     public class ONG
     {
         public float MAX_VALUE = 100;
@@ -29,27 +28,24 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
 
-    private void Start()
-    {
-        PetList = petList;
-    }
-
     private void Update()
     {
         _ong.mood = GetGeneralMood();
     }
 
     #region PET HANDLER
-    public static void AddNewPetToWorld(String name, String species, EntityData.Personalities personalities)
+
+    public static void AddNewPetToWorld(String name, Sprite picture, EntityData.Personalities personalities)
     {
         EntityData data = new EntityData();
         data.Name = name;
         data.Personality = personalities;
-        data.Picture = PetList[0].petPerfil.Picture;
+        data.Picture = picture;
 
-        PetStatusManager newpet = Instantiate<PetStatusManager>(PetList[0]);
+        Pet newpet = Instantiate<Pet>(PetArray[0]);
         newpet.petPerfil = data;
     }
+
     #endregion
     #region STATUS HANDLER
 
