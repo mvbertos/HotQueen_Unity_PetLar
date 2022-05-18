@@ -16,7 +16,7 @@ public class PlayerShortcuts : MonoBehaviour
     private void Start()
     {
         playerInputs.OnSeventhShortcut += EnableMinigameScreen;
-        playerInputs.OnFifthShortcut += ChangeToolToGrab;
+        playerInputs.OnFirstShortcut += ChangeToolToGrab;
         playerInputs.OnSecondShortcut += ChangeToolToTrigger;
     }
 

@@ -31,7 +31,7 @@ public class PlayerTools : MonoBehaviour
 
     private void OnMouseRightClickCallback()
     {
-        throw new NotImplementedException();
+        Debug.Log("Nothing implemented");
     }
 
     private void OnMouseLeftPressedCallback()
@@ -44,7 +44,6 @@ public class PlayerTools : MonoBehaviour
             switch (playerInputs.mouseRole)
             {
                 case MouseRole.Drag:
-                    Debug.Log(hit.rigidbody.name);
                     playerDragObject.GrabObject(hit.rigidbody);
                     break;
                 case MouseRole.Trigger:

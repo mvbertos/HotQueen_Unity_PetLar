@@ -47,7 +47,6 @@ public class GameManager : MonoBehaviour
 
     public static void AddNewPetToWorld(String name, PetSpecies species, EntityData.Personalities personalities)
     {
-        Debug.Log(species.ToString());
         Pet newpet = Instantiate<Pet>(PetDictionary[species]);
 
         EntityData data = new EntityData(name, PetDictionary[species].Data.Picture, personalities);
