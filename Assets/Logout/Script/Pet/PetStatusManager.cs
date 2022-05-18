@@ -37,7 +37,7 @@ public class PetStatusManager : MonoBehaviour
     private void InitStatus()
     {
         //Health and Stuff
-        status = new PetStatus(100, 60);
+        status = new PetStatus(100, 100);
         maxStatus = new PetStatus(status.Hunger, status.Mood);
     }
 

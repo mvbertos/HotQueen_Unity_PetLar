@@ -28,7 +28,7 @@ public class Perfil : MonoBehaviour
     }
 }
 [System.Serializable]
-public struct EntityData
+public class EntityData
 {
 
     public string Name;
@@ -40,5 +40,12 @@ public struct EntityData
         Cute,
         Mad,
         Playfull
+    }
+
+    public EntityData(string name, Sprite picture, Personalities personality)
+    {
+        Name = name;
+        Picture = picture;
+        Personality = personality;
     }
 }

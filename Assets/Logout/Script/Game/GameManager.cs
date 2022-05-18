@@ -7,7 +7,11 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public static Pet[] PetArray;
+
+    [Tooltip("Drag here, any prefab related to Pet")]
+    public Pet[] petArray;
+    public static Dictionary<PetSpecies, Pet> PetDictionary = new Dictionary<PetSpecies, Pet>();
+
     public class ONG
     {
         public float MAX_VALUE = 100;
@@ -26,6 +30,12 @@ public class GameManager : MonoBehaviour
     {
         _ong = new ONG();
         instance = this;
+
+        foreach (Pet item in petArray)
+        {
+            if (!PetDictionary.ContainsKey(item.Specie))
+                PetDictionary.Add(item.Specie, item);
+        }
     }
 
     private void Update()
@@ -35,15 +45,18 @@ public class GameManager : MonoBehaviour
 
     #region PET HANDLER
 
-    public static void AddNewPetToWorld(String name, Sprite picture, EntityData.Personalities personalities)
+    public static void AddNewPetToWorld(String name, PetSpecies species, EntityData.Personalities personalities)
     {
-        EntityData data = new EntityData();
-        data.Name = name;
-        data.Personality = personalities;
-        data.Picture = picture;
+        Debug.Log(species.ToString());
+        Pet newpet = Instantiate<Pet>(PetDictionary[species]);
 
-        Pet newpet = Instantiate<Pet>(PetArray[0]);
-        newpet.petPerfil = data;
+        EntityData data = new EntityData(name, PetDictionary[species].Data.Picture, personalities);
+        newpet.UpdatePerfil(data.Name, data.Picture, data.Personality);
+    }
+
+    public static void AddNewPetToWorld(Pet pet)
+    {
+        AddNewPetToWorld(pet.Data.Name, pet.Specie, pet.Data.Personality);
     }
 
     #endregion

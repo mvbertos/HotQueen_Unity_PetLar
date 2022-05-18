@@ -21,7 +21,7 @@ public class EventManager : MonoBehaviour
         //if list is null
         //create a randomized event, between all the events existents
         // add to the list
-        Adoption adoption = new Adoption(pet);
+        Adoption adoption = new Adoption();
         events.Add(adoption);
         //Start events
         StartNewEvent();

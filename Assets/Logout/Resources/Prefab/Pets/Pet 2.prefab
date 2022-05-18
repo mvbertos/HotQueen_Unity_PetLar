@@ -153,8 +153,9 @@ GameObject:
   - component: {fileID: 41245127816401537}
   - component: {fileID: 990243016}
   - component: {fileID: 6364446130106071276}
+  - component: {fileID: 843357897}
   m_Layer: 20
-  m_Name: Pet
+  m_Name: Pet 2
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -283,7 +284,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 41245127816401551}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: eb1ae3e395b532e4d8dbc08a412e4a7d, type: 2}
   m_CullingMode: 0
@@ -321,10 +322,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 1
-  petPerfil:
-    Name: Nermal
-    Picture: {fileID: 21300000, guid: ec47f75fe8aff1644ac73998f4ad31b5, type: 3}
-    Personality: 2
 --- !u!114 &990243016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -356,6 +353,25 @@ MonoBehaviour:
   food_layerMask:
     serializedVersion: 2
     m_Bits: 128
+--- !u!114 &843357897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41245127816401551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 903957dd5e1ebba48a77154cd9d8b47f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+    Name: Plastix
+    Picture: {fileID: 21300000, guid: ec47f75fe8aff1644ac73998f4ad31b5, type: 3}
+    Personality: 1
+  Specie: 1
+  spriteRenderer: {fileID: 41245127816401548}
+  petNameTMP: {fileID: 5658830757191294443}
 --- !u!1 &41245128436227923
 GameObject:
   m_ObjectHideFlags: 0

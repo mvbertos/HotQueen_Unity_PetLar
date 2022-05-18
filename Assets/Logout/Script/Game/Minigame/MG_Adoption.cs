@@ -41,8 +41,7 @@ public class MG_Adoption : MonoBehaviour
 
             //put it in adoption
             //create new data to the first pet in the list
-            EntityData new_data = new EntityData();
-            new_data = adoption.petPerfil;
+            EntityData new_data = new EntityData(adoption.Data.Name, adoption.Data.Picture, adoption.Data.Personality);
 
             //apply into petfil_pet
             perfil_human.current_data = newData[0];

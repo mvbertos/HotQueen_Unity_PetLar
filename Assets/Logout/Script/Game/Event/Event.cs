@@ -1,7 +1,9 @@
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Random = UnityEngine.Random;
 
 //Events are classes that hold actions and information to the event that will be executed
 //some of the information are
@@ -24,12 +26,16 @@ public class Event
 }
 public class Adoption : Event
 {
-    Pet pet_reference;
-    public Adoption(Pet petReference)
+    Pet petReference;
+    public Adoption()
     {
-        pet_reference = petReference;
+        //get a random pet
+        var values = Enum.GetValues(typeof(PetSpecies));
+        PetSpecies species = (PetSpecies)values.GetValue(Random.Range(0, values.Length));
+        petReference = GameManager.PetDictionary[species];
+
         //Set event_sprite as it´s appearance
-        event_sprite = pet_reference.petPerfil.Picture;
+        event_sprite = petReference.Data.Picture;
         //Set Description
         event_description = "A pet is getting cold out side your door, you wish to give him a temporary home?";
         //Set Time Range
@@ -37,8 +43,7 @@ public class Adoption : Event
     }
     public void Adopt()
     {
-        //instantiate a pet prefab
-        GameManager.AddNewPetToWorld(pet_reference.petPerfil.Name, pet_reference.petPerfil.Picture, EntityData.Personalities.Playfull);
+        GameManager.AddNewPetToWorld(petReference);
     }
 
     public override void ConfirmEvent()
