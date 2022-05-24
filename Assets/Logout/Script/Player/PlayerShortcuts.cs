@@ -11,7 +11,7 @@ public class PlayerShortcuts : MonoBehaviour
     [SerializeField] private PlayerInputs playerInputs;
 
     //SCREEN REFERENCES
-    [SerializeField] private MinigameScreen MinigameScreen;
+    [SerializeField] private TrellowInterface trellowInterface;
 
     private void Start()
     {
@@ -32,6 +32,6 @@ public class PlayerShortcuts : MonoBehaviour
 
     private void EnableMinigameScreen()
     {
-        MinigameScreen.gameObject.SetActive(!MinigameScreen.isActiveAndEnabled);
+        trellowInterface.Show();
     }
 }

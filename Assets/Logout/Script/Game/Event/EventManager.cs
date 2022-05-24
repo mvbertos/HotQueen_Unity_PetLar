@@ -7,6 +7,7 @@ public class EventManager : MonoBehaviour
 {
 
     List<Event> events = new List<Event>();
+    List<Event> eventsToExecute = new List<Event>();
     public EventInterfaceManager eventInterface;
     public Pet pet;
 
@@ -21,8 +22,9 @@ public class EventManager : MonoBehaviour
         //if list is null
         //create a randomized event, between all the events existents
         // add to the list
-        Adoption adoption = new Adoption();
+        Rescue adoption = new Rescue();
         events.Add(adoption);
+
         //Start events
         StartNewEvent();
     }
@@ -37,12 +39,12 @@ public class EventManager : MonoBehaviour
         Event rand_event = events[rand_index];
 
         //randomize timer
-        int rand_time = Random.Range((int)rand_event.time_range.x, (int)rand_event.time_range.y);
+        int rand_time = Random.Range((int)rand_event.TimeRange.x, (int)rand_event.TimeRange.y);
 
         //create new timer
         TimerEvent.Create(() =>
         {
-            eventInterface.Enable(rand_event.event_description, rand_event.event_sprite, rand_event.ConfirmEvent, rand_event.DeclineEvent);
+            eventInterface.Enable(rand_event.EventDescription, rand_event.EventSprite, rand_event.ConfirmEvent, rand_event.DeclineEvent);
         }, 1);
 
         // if there is no more events in the list

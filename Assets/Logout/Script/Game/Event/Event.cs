@@ -11,9 +11,10 @@ using Random = UnityEngine.Random;
 public class Event
 {
     //Return a min and max int range to be used as reference in EVENTMANAGER
-    public Sprite event_sprite;
-    public string event_description;
-    public Vector2 time_range;
+    public Sprite EventSprite;
+    public string EventName;
+    public string EventDescription;
+    public Vector2 TimeRange;
     public virtual void ConfirmEvent()
     {
         Debug.Log("Confirm");
@@ -24,10 +25,14 @@ public class Event
     }
 
 }
-public class Adoption : Event
+
+/// <summary>
+/// show the possibility to rescue new pets
+/// </summary>
+public class Rescue : Event
 {
     Pet petReference;
-    public Adoption()
+    public Rescue()
     {
         //get a random pet
         var values = Enum.GetValues(typeof(PetSpecies));
@@ -35,24 +40,70 @@ public class Adoption : Event
         petReference = GameManager.PetDictionary[species];
 
         //Set event_sprite as it´s appearance
-        event_sprite = petReference.Data.Picture;
+        EventSprite = petReference.Data.Picture;
+        //set name
+        EventName = "Pet Rescue";
         //Set Description
-        event_description = "A pet is getting cold out side your door, you wish to give him a temporary home?";
+        EventDescription = "A pet is getting cold out side your door, you wish to give him a temporary home?";
         //Set Time Range
-        time_range = new Vector2(5, 10);
-    }
-    public void Adopt()
-    {
-        GameManager.AddNewPetToWorld(petReference);
+        TimeRange = new Vector2(1, 2);
     }
 
     public override void ConfirmEvent()
     {
-        Adopt();
+        GameManager.AddNewPetToWorld(petReference);
     }
 
     public override void DeclineEvent()
     {
-        Debug.Log("You disserve hell!!");
+        //nothing for the moment
     }
+}
+/// <summary>
+/// Donation when it´s triggered will return money to the player bank
+/// </summary>
+public class Donation : Event
+{
+    private float PriceValue;
+
+    public Donation(float priceValue)
+    {
+        PriceValue = priceValue;
+        EventSprite = null;
+        EventName = "Post de doação";
+        EventDescription = "Faça um post para que outros ajudem sua causa!";
+
+        TimeRange = new Vector2(20, 25);
+    }
+
+    public override void ConfirmEvent()
+    {
+        LoopReward();
+    }
+    public override void DeclineEvent()
+    {
+        TimerEvent.StopTimer("Reward");
+    }
+    private void LoopReward()
+    {
+        RewardMoney();
+        TimerEvent.Create(() => { LoopReward(); }, 0.5f, "Reward");
+    }
+    private void RewardMoney()
+    {
+        //increase player money
+        Debug.Log("increase money");
+    }
+}
+
+public class Adoption : Event
+{
+    public Adoption()
+    {
+        EventSprite = null;
+        EventName = "Doação";
+        EventDescription = "Doe um bixinho resgatado!";
+        TimeRange = new Vector2(1, 2);
+    }
+
 }

@@ -8,6 +8,9 @@ public class FoodPot : MonoBehaviour
     private float current_food_amount = 0;
     [SerializeField] private float maxFood = 10;
     [SerializeField] private float hungerRegen = 10;
+    [SerializeField] private Sprite emptyPot;
+    [SerializeField] private Sprite fullPot;
+
 
     public void FillPot()
     {
@@ -27,8 +30,7 @@ public class FoodPot : MonoBehaviour
             return;
         }
 
-        SpriteRenderer renderer = this.gameObject.GetComponent<SpriteRenderer>();
-        renderer.color = Color.green;
+        UpdateSprite();
     }
 
     public bool IsEmpty()
@@ -58,15 +60,15 @@ public class FoodPot : MonoBehaviour
         SpriteRenderer _spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
         if (IsEmpty())
         {
-            _spriteRenderer.color = Color.red;
+            _spriteRenderer.sprite = emptyPot;
         }
         else if (IsFull())
         {
-            _spriteRenderer.color = Color.green;
+            _spriteRenderer.sprite = fullPot;
         }
         else
         {
-            _spriteRenderer.color = Color.yellow;
+            //_spriteRenderer.color = Color.yellow;
         }
     }
 }
