@@ -10,7 +10,7 @@ public class MG_Adoption : MonoBehaviour
     [SerializeField] private Perfil perfil_pet;
     [SerializeField] private Perfil perfil_human;
     private List<Pet> petList = new List<Pet>();
-    private Pet adoption;
+    private Pet pet;
 
     private void Start()
     {
@@ -36,12 +36,12 @@ public class MG_Adoption : MonoBehaviour
         {
             //get a random pet in the list
             Pet[] petarray = petList.ToArray();
-            adoption = petarray[Random.Range(0, petarray.Length)];
+            pet = petarray[Random.Range(0, petarray.Length)];
 
 
             //put it in adoption
             //create new data to the first pet in the list
-            EntityData new_data = new EntityData(adoption.Data.Name, adoption.Data.Picture, adoption.Data.Personality);
+            EntityData new_data = pet.GetData();
 
             //apply into petfil_pet
             perfil_human.current_data = newData[0];
@@ -60,7 +60,7 @@ public class MG_Adoption : MonoBehaviour
     {
         //get pet to bet adopted
         //remove it from world
-        Destroy(adoption.gameObject);
+        Destroy(pet.gameObject);
         Destroy(this.gameObject);
     }
 

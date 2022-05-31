@@ -9,7 +9,7 @@ public class EventManager : MonoBehaviour
     List<Event> events = new List<Event>();
     List<Event> eventsToExecute = new List<Event>();
     public EventInterfaceManager eventInterface;
-    public Pet pet;
+    public Pet[] pet;
 
     private void Start()
     {
@@ -22,8 +22,8 @@ public class EventManager : MonoBehaviour
         //if list is null
         //create a randomized event, between all the events existents
         // add to the list
-        Rescue adoption = new Rescue();
-        events.Add(adoption);
+        Rescue rescues = new Rescue();
+        events.Add(rescues);
 
         //Start events
         StartNewEvent();

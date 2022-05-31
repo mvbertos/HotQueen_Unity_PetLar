@@ -2,15 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    [Tooltip("Drag here, any prefab related to Pet")]
-    public Pet[] petArray;
-    public static Dictionary<PetSpecies, Pet> PetDictionary = new Dictionary<PetSpecies, Pet>();
+    //PET THINGS
+    public static List<Pet> petInstances = new List<Pet>(); //register of all pets in world currently
+    [SerializeField] private Pet[] petReferences;//filled with prefabs
+    public static Pet[] petArray { private set; get; }// same as petReferences but static
+    private static readonly String[] petNames = { "Alberto", "Samanta", "Poly", "Nino", "Amaterasu" }; //list of names to be used
 
     public class ONG
     {
@@ -30,12 +32,7 @@ public class GameManager : MonoBehaviour
     {
         _ong = new ONG();
         instance = this;
-
-        foreach (Pet item in petArray)
-        {
-            if (!PetDictionary.ContainsKey(item.Specie))
-                PetDictionary.Add(item.Specie, item);
-        }
+        petArray = petReferences;
     }
 
     private void Update()
@@ -45,17 +42,27 @@ public class GameManager : MonoBehaviour
 
     #region PET HANDLER
 
-    public static void AddNewPetToWorld(String name, PetSpecies species, EntityData.Personalities personalities)
-    {
-        Pet newpet = Instantiate<Pet>(PetDictionary[species]);
+    // public static void AddNewPetToWorld(String name, Species species, EntityData.Personalities personalities)
+    // {
+    //     Pet newpet = Instantiate<Pet>(PetDictionary[species]);
 
-        EntityData data = new EntityData(name, PetDictionary[species].Data.Picture, personalities);
-        newpet.UpdatePerfil(data.Name, data.Picture, data.Personality);
-    }
+    //     EntityData data = new EntityData(name, PetDictionary[species].Data.Picture, personalities);
+    //     newpet.UpdatePerfil(data.Name, data.Picture, data.Personality);
+    // }
 
     public static void AddNewPetToWorld(Pet pet)
     {
-        AddNewPetToWorld(pet.Data.Name, pet.Specie, pet.Data.Personality);
+        Pet newpet = Instantiate<Pet>(pet);
+        newpet.ChangeName(petNames[Random.Range(0, petNames.Length)]);
+        UpdatePetInstances();
+    }
+
+    private static void UpdatePetInstances()
+    {
+        foreach (var pet in GameObject.FindObjectsOfType<Pet>())
+        {
+            petInstances.Add(pet);
+        }
     }
 
     #endregion

@@ -31,16 +31,12 @@ public class Event
 /// </summary>
 public class Rescue : Event
 {
-    Pet petReference;
+    Pet randomPet;
     public Rescue()
     {
-        //get a random pet
-        var values = Enum.GetValues(typeof(PetSpecies));
-        PetSpecies species = (PetSpecies)values.GetValue(Random.Range(0, values.Length));
-        petReference = GameManager.PetDictionary[species];
-
+        randomPet = GameManager.petArray.ToArray()[Random.Range(0,GameManager.petArray.Length-1)];
         //Set event_sprite as it´s appearance
-        EventSprite = petReference.Data.Picture;
+        EventSprite = randomPet.GetData().Picture;
         //set name
         EventName = "Pet Rescue";
         //Set Description
@@ -51,7 +47,7 @@ public class Rescue : Event
 
     public override void ConfirmEvent()
     {
-        GameManager.AddNewPetToWorld(petReference);
+        GameManager.AddNewPetToWorld(randomPet);
     }
 
     public override void DeclineEvent()

@@ -49,3 +49,20 @@ public class EntityData
         Personality = personality;
     }
 }
+
+[System.Serializable]
+public class PetData : EntityData
+{
+    public Species specie;
+    public PetData(string name, Sprite picture, Personalities personality,Species species) : base(name, picture, personality)
+    {
+        this.specie = species;
+    }
+}
+
+public enum Species
+{
+    DEFAULT = 0,
+    POODLE = 1,
+    GOLDENRETRIVER = 2,
+}

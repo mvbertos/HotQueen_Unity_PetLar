@@ -6,41 +6,19 @@ using System;
 
 public class Pet : MonoBehaviour
 {
-    [SerializeField] private EntityData data = new EntityData("", null, 0);
-    public EntityData Data
-    {
-        private set
-        {
-            data = value;
-        }
-        get
-        {
-            return data;
-        }
-    }
-    public PetSpecies Specie;
-    [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private TMP_Text petNameTMP;
+    [SerializeField] private PetData data;
+    [SerializeField] private InformationDisplayer informationDisplayer;
 
     private void Start()
     {
-        UpdatePet();
+        informationDisplayer.UpdateInformation(data.Name, 100);
     }
-
-    public void UpdatePerfil(string name, Sprite sprite, EntityData.Personalities personality)
-    {
-        Data = new EntityData(name, sprite, personality);
+    
+    public void ChangeName(String newName){
+        data.Name = newName;
     }
-
-    private void UpdatePet()
-    {
-        petNameTMP.text = Data.Name;
-        spriteRenderer.sprite = Data.Picture;
-    }
-}
-public enum PetSpecies
-{
-    DEFAULT = 0,
-    POODLE = 1,
-    GOLDENRETRIVER = 2,
+    
+    public PetData GetData(){
+        return data;
+    } 
 }

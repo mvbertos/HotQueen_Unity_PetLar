@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 93179151}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.96, z: 0}
-  m_LocalScale: {x: 0.66, y: 0.64, z: 1}
+  m_LocalPosition: {x: 0.08, y: -0.05, z: 0}
+  m_LocalScale: {x: 2.16, y: 1.52, z: 1}
   m_Children: []
   m_Father: {fileID: 1970229170}
   m_RootOrder: 0
@@ -154,7 +154,7 @@ GameObject:
   - component: {fileID: 6364446130106071276}
   - component: {fileID: 843357897}
   m_Layer: 20
-  m_Name: Pet
+  m_Name: Dog
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -351,14 +351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 903957dd5e1ebba48a77154cd9d8b47f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data:
-    Name: Lancer
-    Picture: {fileID: -6149270787681551220, guid: 388de3f7d5da91e45b4ab16176943ab5,
-      type: 3}
-    Personality: 1
-  Specie: 2
-  spriteRenderer: {fileID: 41245127816401548}
-  petNameTMP: {fileID: 5658830757191294443}
+  informationDisplayer: {fileID: 4979509058417092103}
 --- !u!1 &41245128436227923
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,7 +446,7 @@ GameObject:
   - component: {fileID: 5658830757191294442}
   - component: {fileID: 5658830757191294443}
   m_Layer: 20
-  m_Name: Text (TMP)
+  m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -773,8 +766,9 @@ GameObject:
   - component: {fileID: 5658830757740000369}
   - component: {fileID: 5658830757740000370}
   - component: {fileID: 5658830757740000371}
+  - component: {fileID: 4979509058417092103}
   m_Layer: 20
-  m_Name: MoodBar
+  m_Name: PetInformation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -862,6 +856,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &4979509058417092103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5658830757740000381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 915a79e1c3cdbaf43b16c68fcb61d920, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameText: {fileID: 5658830757191294443}
+  moodSlider: {fileID: 5658830759100841550}
 --- !u!1 &5658830758962033016
 GameObject:
   m_ObjectHideFlags: 0
@@ -908,7 +916,7 @@ GameObject:
   - component: {fileID: 5658830759100841551}
   - component: {fileID: 5658830759100841550}
   m_Layer: 20
-  m_Name: Slider
+  m_Name: MoodBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
