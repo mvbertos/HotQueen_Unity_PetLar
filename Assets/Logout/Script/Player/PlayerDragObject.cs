@@ -6,22 +6,30 @@ using UnityEngine.InputSystem;
 public class PlayerDragObject : MonoBehaviour
 {
     public bool dragging { private set; get; }
+    [SerializeField] private float dragSpeed = 3.5f;
     private Rigidbody2D rigidbodyDragged = null;
-    private Rigidbody2D defaultRigidbody = null;
+    private DefaultRigidBody defaultRigidBody = new DefaultRigidBody();
+
+    public class DefaultRigidBody
+    {
+        public float drag = 0;
+        public RigidbodyType2D bodyType = RigidbodyType2D.Dynamic;
+    }
 
     private void Update()
     {
         if (dragging)
         {
-            DragObjectToTarget(rigidbodyDragged.transform, (Vector2)Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()));
+            DragObjectToTarget(rigidbodyDragged, (Vector2)Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()));
         }
     }
 
     public void ReleaseObject()
     {
         dragging = false;
+        rigidbodyDragged.drag = defaultRigidBody.drag;
+        rigidbodyDragged.bodyType = defaultRigidBody.bodyType;
         rigidbodyDragged = null;
-        defaultRigidbody = null;
     }
 
     public void GrabObject(Rigidbody2D value)
@@ -30,19 +38,26 @@ public class PlayerDragObject : MonoBehaviour
         {
             dragging = true;
             rigidbodyDragged = value;
-            defaultRigidbody = value;
-            value.isKinematic = true;
+            defaultRigidBody = new DefaultRigidBody();
+
+            //body type
+            defaultRigidBody.bodyType = rigidbodyDragged.bodyType;
+            rigidbodyDragged.bodyType = RigidbodyType2D.Dynamic;
+            
+            //drag
+            defaultRigidBody.drag = rigidbodyDragged.drag;
+            rigidbodyDragged.drag = 0;
         }
         else
         {
-            Debug.Log("object is null");
             ReleaseObject();
         }
     }
 
-    private void DragObjectToTarget(Transform value, Vector2 targetPosition)
+    private void DragObjectToTarget(Rigidbody2D objectToDrag, Vector2 targetPosition)
     {
-        value.position = targetPosition;
+        Vector2 direction = targetPosition - (Vector2)objectToDrag.transform.position;
+        objectToDrag.velocity = direction * dragSpeed;
     }
 
 }

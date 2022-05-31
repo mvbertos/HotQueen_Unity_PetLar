@@ -10,6 +10,7 @@ public class FoodPot : MonoBehaviour
     [SerializeField] private float hungerRegen = 10;
     [SerializeField] private Sprite emptyPot;
     [SerializeField] private Sprite fullPot;
+    [SerializeField] private SpriteRenderer spriteRenderer;
 
 
     public void FillPot()
@@ -57,14 +58,13 @@ public class FoodPot : MonoBehaviour
 
     private void UpdateSprite()
     {
-        SpriteRenderer _spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
         if (IsEmpty())
         {
-            _spriteRenderer.sprite = emptyPot;
+            spriteRenderer.sprite = emptyPot;
         }
         else if (IsFull())
         {
-            _spriteRenderer.sprite = fullPot;
+            spriteRenderer.sprite = fullPot;
         }
         else
         {

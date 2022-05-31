@@ -6,18 +6,18 @@ using UnityEngine;
 
 public class PetNeedsHandler : MonoBehaviour
 {
-    [SerializeField] private PetStatusManager _pet_status_manager;
-    [SerializeField] private PetMovementation _pet_movementation;
-    [SerializeField] private LayerMask food_layerMask;
+    [SerializeField] private PetStatusManager petStatusManager;
+    [SerializeField] private AIMovimentation petMovementation;
+    [SerializeField] private LayerMask foodLayerMask;
 
     private void Start()
     {
-        _pet_status_manager.OnHungerCallback += LookForFood;
+        petStatusManager.OnHungerCallback += LookForFood;
     }
 
     private void OnDestroy()
     {
-        _pet_status_manager.OnHungerCallback -= LookForFood;
+        petStatusManager.OnHungerCallback -= LookForFood;
     }
 
     private void LookForFood()
@@ -27,17 +27,24 @@ public class PetNeedsHandler : MonoBehaviour
         //return if is null
         if (target)
         {
-            _pet_movementation.SetNewTargetPosition(target.position);
-            _pet_movementation.OnCloseToTargetCallback += usePot;
+            petMovementation.GoInteract(target, usePot, foodLayerMask);
+        }
+    }
+
+    private void usePot(RaycastHit2D hit)
+    {
+         if (hit.collider.TryGetComponent<FoodPot>(out FoodPot foodPot))
+        {
+            petStatusManager.status.Hunger += foodPot.UsePot();
         }
     }
 
     private void usePot()
     {
-        RaycastHit2D hit = Physics2D.CircleCast(this.transform.position, 2, this.transform.right, 1, food_layerMask);
+        RaycastHit2D hit = Physics2D.CircleCast(this.transform.position, 2, this.transform.right, 1, foodLayerMask);
         if (hit && hit.collider.TryGetComponent<FoodPot>(out FoodPot foodPot))
         {
-            _pet_status_manager.status.Hunger += foodPot.UsePot();
+            petStatusManager.status.Hunger += foodPot.UsePot();
         }
     }
 

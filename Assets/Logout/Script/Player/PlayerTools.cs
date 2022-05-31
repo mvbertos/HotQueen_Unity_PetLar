@@ -21,17 +21,17 @@ public class PlayerTools : MonoBehaviour
         playerInputs.OnMouseRightDown += OnMouseRightClickCallback;
     }
 
+    private void OnMouseRightClickCallback()
+    {
+        Debug.Log("Nothing implemented");
+    }
+
     private void OnMouseLeftUpCallback()
     {
         if (playerDragObject.dragging)
         {
             playerDragObject.ReleaseObject();
         }
-    }
-
-    private void OnMouseRightClickCallback()
-    {
-        Debug.Log("Nothing implemented");
     }
 
     private void OnMouseLeftPressedCallback()
@@ -47,31 +47,12 @@ public class PlayerTools : MonoBehaviour
                     playerDragObject.GrabObject(hit.rigidbody);
                     break;
                 case MouseRole.Trigger:
-                    //if pet
-                    TryPet(hit.rigidbody);
                     //if pot
                     TryFillPot(hit.rigidbody);
                     break;
                 default:
                     break;
             }
-        }
-    }
-
-    private void TryStopPet(Rigidbody2D otherRigidbody)
-    {
-        if (otherRigidbody.TryGetComponent<PetThePet>(out PetThePet _pet))
-        {
-            _pet.StopPet();
-        }
-    }
-
-    private void TryPet(Rigidbody2D otherRigidbody)
-    {
-        //Pet
-        if (otherRigidbody.TryGetComponent<PetThePet>(out PetThePet _pet))
-        {
-            _pet.StartPet();
         }
     }
 

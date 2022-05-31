@@ -11,6 +11,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -0.19
       objectReference: {fileID: 0}
+    - target: {fileID: 93179153, guid: 68c3f92be8c5db845a873964febe4dd8, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 843357897, guid: 68c3f92be8c5db845a873964febe4dd8, type: 3}
+      propertyPath: data.Name
+      value: Hababy
+      objectReference: {fileID: 0}
     - target: {fileID: 843357897, guid: 68c3f92be8c5db845a873964febe4dd8, type: 3}
       propertyPath: data.Picture
       value: 
@@ -143,8 +151,14 @@ PrefabInstance:
     - target: {fileID: 41245127816401551, guid: 68c3f92be8c5db845a873964febe4dd8,
         type: 3}
       propertyPath: m_Name
-      value: Pet
+      value: Cat
       objectReference: {fileID: 0}
+    - target: {fileID: 1736755808706651631, guid: 68c3f92be8c5db845a873964febe4dd8,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 7703267712964857159, guid: 388de3f7d5da91e45b4ab16176943ab5,
+        type: 3}
     - target: {fileID: 5658830757239185774, guid: 68c3f92be8c5db845a873964febe4dd8,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -155,7 +169,8 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4396709700427253320, guid: 68c3f92be8c5db845a873964febe4dd8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 68c3f92be8c5db845a873964febe4dd8, type: 3}
 --- !u!114 &3558352592126114499 stripped
 MonoBehaviour:
