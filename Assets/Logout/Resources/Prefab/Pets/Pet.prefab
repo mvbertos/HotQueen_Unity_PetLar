@@ -231,6 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 1
+  pet: {fileID: 843357897}
 --- !u!114 &6364446130106071276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,8 +244,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6da04b655fe50ea4d8903db786c2e981, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  petStatusManager: {fileID: 41245127816401537}
-  petMovementation: {fileID: 6723969952448166849}
+  pet: {fileID: 843357897}
+  statusManager: {fileID: 41245127816401537}
+  movementation: {fileID: 6723969952448166849}
   foodLayerMask:
     serializedVersion: 2
     m_Bits: 128

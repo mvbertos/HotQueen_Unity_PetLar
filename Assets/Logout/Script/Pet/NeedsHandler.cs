@@ -4,22 +4,26 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class PetNeedsHandler : MonoBehaviour
+public class NeedsHandler : MonoBehaviour
 {
-    [SerializeField] private PetStatusManager petStatusManager;
-    [SerializeField] private AIMovimentation petMovementation;
+
+    [SerializeField] private Pet pet;
+    [SerializeField] private StatusManager statusManager;
+    [SerializeField] private AIMovimentation movementation;
     [SerializeField] private LayerMask foodLayerMask;
 
-    private void Start()
+    private void OnEnable()
     {
-        petStatusManager.OnHungerCallback += LookForFood;
+        statusManager.OnHungerCallback += LookForFood;
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
-        petStatusManager.OnHungerCallback -= LookForFood;
+        statusManager.OnHungerCallback -= LookForFood;
     }
 
+    //Hunger
+    #region Hunger
     private void LookForFood()
     {
         Transform target = ClosestFoodPot();
@@ -27,24 +31,17 @@ public class PetNeedsHandler : MonoBehaviour
         //return if is null
         if (target)
         {
-            petMovementation.GoInteract(target, usePot, foodLayerMask);
+            movementation.GoInteract(target, usePot, foodLayerMask);
         }
     }
 
     private void usePot(RaycastHit2D hit)
     {
-         if (hit.collider.TryGetComponent<FoodPot>(out FoodPot foodPot))
+        if (hit.collider.TryGetComponent<FoodPot>(out FoodPot foodPot))
         {
-            petStatusManager.status.Hunger += foodPot.UsePot();
-        }
-    }
-
-    private void usePot()
-    {
-        RaycastHit2D hit = Physics2D.CircleCast(this.transform.position, 2, this.transform.right, 1, foodLayerMask);
-        if (hit && hit.collider.TryGetComponent<FoodPot>(out FoodPot foodPot))
-        {
-            petStatusManager.status.Hunger += foodPot.UsePot();
+            pet.GetStatus(out PetStatus status, out PetStatus maxStatus);
+            status.Hunger += foodPot.UsePot();
+            pet.SetStatus(status);
         }
     }
 
@@ -70,4 +67,5 @@ public class PetNeedsHandler : MonoBehaviour
         }
         return false;
     }
+    #endregion
 }

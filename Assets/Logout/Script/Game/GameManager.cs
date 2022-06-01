@@ -35,21 +35,8 @@ public class GameManager : MonoBehaviour
         petArray = petReferences;
     }
 
-    private void Update()
-    {
-        _ong.mood = GetGeneralMood();
-    }
-
-    #region PET HANDLER
-
-    // public static void AddNewPetToWorld(String name, Species species, EntityData.Personalities personalities)
-    // {
-    //     Pet newpet = Instantiate<Pet>(PetDictionary[species]);
-
-    //     EntityData data = new EntityData(name, PetDictionary[species].Data.Picture, personalities);
-    //     newpet.UpdatePerfil(data.Name, data.Picture, data.Personality);
-    // }
-
+    
+    //Pets
     public static void AddNewPetToWorld(Pet pet)
     {
         Pet newpet = Instantiate<Pet>(pet);
@@ -64,24 +51,4 @@ public class GameManager : MonoBehaviour
             petInstances.Add(pet);
         }
     }
-
-    #endregion
-    #region STATUS HANDLER
-
-    //return media from all the pets in the game
-    private float GetGeneralMood()
-    {
-        float moodCount = 0;
-
-        PetStatusManager[] petsList = FindObjectsOfType<PetStatusManager>();
-        foreach (PetStatusManager item in petsList)
-        {
-            moodCount += item.status.Mood;
-        }
-
-        float moodMedia = moodCount / petsList.Length;
-        return moodMedia;
-    }
-
-    #endregion
 }
