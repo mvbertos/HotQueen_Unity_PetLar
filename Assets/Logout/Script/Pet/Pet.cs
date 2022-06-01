@@ -35,7 +35,7 @@ public class Pet : MonoBehaviour
 
     public void SetStatus(PetStatus status)
     {
-        status = this.status;
+        this.status = new PetStatus(status.Mood, status.Hunger, status.Sleep, status.Bathroom);
     }
 
     public void GetStatus(out PetStatus status, out PetStatus maxStatus)
@@ -48,23 +48,25 @@ public class Pet : MonoBehaviour
     private void InitStatus()
     {
         //Health and Stuff
-        status = new PetStatus(100, 51);
-        maxStatus = new PetStatus(status.Hunger, status.Mood);
+        status = new PetStatus(100, 100, 100, 100);
+        maxStatus = new PetStatus(status.Mood, status.Hunger, status.Sleep, status.Bathroom);
     }
 }
 
 [System.Serializable]
 public class PetStatus
 {
-    public float Mood;
-    public float Hunger;
-    public float Sleep;
-    public float Bathroom;
+    public float Mood; //mood will be reduced if in the pet range, there is unlikable stuff like dirty sandbox or no food in pot
+    public float Hunger; //hunger will reduce over time
+    public float Sleep; //sleep will reduce over time
+    public float Bathroom; // Bathroom will reduce every time pet eat something
 
-    public PetStatus(float mood, float hunger)
+    public PetStatus(float mood, float hunger, float sleep, float bathroom)
     {
         Mood = mood;
         Hunger = hunger;
+        Sleep = sleep;
+        Bathroom = bathroom;
     }
 }
 

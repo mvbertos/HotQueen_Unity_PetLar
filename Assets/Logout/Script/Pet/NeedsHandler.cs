@@ -22,6 +22,25 @@ public class NeedsHandler : MonoBehaviour
         statusManager.OnHungerCallback -= LookForFood;
     }
 
+    //bathroom 
+    #region Bathroom
+    private void LookForBathroom()
+    {
+        //loof for the closest bathroom
+        //if is a cat look for a sandbox
+        //if is a dog look for a paper
+
+        //if found 
+        UseBathroom();
+    }
+
+    private void UseBathroom()
+    {
+        //maximize bathroom status
+    }
+
+    #endregion
+
     //Hunger
     #region Hunger
     private void LookForFood()
@@ -41,6 +60,7 @@ public class NeedsHandler : MonoBehaviour
         {
             pet.GetStatus(out PetStatus status, out PetStatus maxStatus);
             status.Hunger += foodPot.UsePot();
+            status.Bathroom += foodPot.UsePot();
             pet.SetStatus(status);
         }
     }
