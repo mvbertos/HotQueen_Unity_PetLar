@@ -9,6 +9,7 @@ public class PlayerTools : MonoBehaviour
 {
 
     private PlayerInputs playerInputs;
+    [SerializeField] private LayerMask layerInteraction;
     [SerializeField] private PlayerDragObject playerDragObject;
 
     private void Start()
@@ -37,18 +38,21 @@ public class PlayerTools : MonoBehaviour
     private void OnMouseLeftPressedCallback()
     {
         Ray mousePosition = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-        RaycastHit2D hit = Physics2D.GetRayIntersection(mousePosition);
+        RaycastHit2D hit = Physics2D.GetRayIntersection(mousePosition, 100, layerInteraction);
 
-        if (hit.rigidbody)
+        if (hit)
         {
             switch (playerInputs.mouseRole)
             {
                 case MouseRole.Drag:
-                    playerDragObject.GrabObject(hit.rigidbody);
+                    if (hit.rigidbody)
+                    {
+                        playerDragObject.GrabObject(hit.rigidbody);
+                    }
                     break;
                 case MouseRole.Trigger:
                     //if pot
-                    TryFillPot(hit.rigidbody);
+                    Interact(hit.transform.gameObject);
                     break;
                 default:
                     break;
@@ -56,12 +60,16 @@ public class PlayerTools : MonoBehaviour
         }
     }
 
-    private void TryFillPot(Rigidbody2D otherRigidbody)
+    private void Interact(GameObject otherRigidbody)
     {
         //FillPot
         if (otherRigidbody.TryGetComponent<FoodPot>(out FoodPot pot))
         {
-            pot.FillPot();
+            pot.Fill();
+        }
+        else if (otherRigidbody.TryGetComponent<Bathroom>(out Bathroom bathroom))
+        {
+            bathroom.Clean();
         }
     }
 }

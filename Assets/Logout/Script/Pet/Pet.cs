@@ -48,8 +48,8 @@ public class Pet : MonoBehaviour
     private void InitStatus()
     {
         //Health and Stuff
-        status = new PetStatus(100, 100, 100, 100);
-        maxStatus = new PetStatus(status.Mood, status.Hunger, status.Sleep, status.Bathroom);
+        status = new PetStatus(100, 51, 100, 51);
+        maxStatus = new PetStatus(100, 100, 100, 100);
     }
 }
 

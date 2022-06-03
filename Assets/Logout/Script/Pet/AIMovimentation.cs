@@ -50,8 +50,6 @@ public class AIMovimentation : MonoBehaviour
             {
                 OnInteract?.Invoke(hit);
                 OnUpdate = null;
-
-                SetDestination(this.transform.position - target.position);
             }
         };
     }

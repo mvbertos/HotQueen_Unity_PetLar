@@ -13,7 +13,7 @@ public class FoodPot : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
 
 
-    public void FillPot()
+    public void Fill()
     {
         if (GameManager._ong.food >= maxFood)
         {

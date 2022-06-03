@@ -19,34 +19,41 @@ public class StatusManager : MonoBehaviour
 
     //callbacks
     public Action OnHungerCallback;
+    public Action OnBathroomCallback;
 
     private void Start()
     {
         //Handle status based in 
         PetLarUtils.LoopTimerEvent(UpdateHunger, 1, "UpdateHunger");
-        PetLarUtils.LoopTimerEvent(UpdateMood, 1, "UpdateMood");
+        PetLarUtils.LoopTimerEvent(UpdateBathroom, 1, "UpdateBathroom");
     }
 
     private void UpdateMood()
     {
-        PetStatus _status = null;
-        PetStatus _maxStatus = null;
-        pet.GetStatus(out _status, out _maxStatus);
+
+        pet.GetStatus(out PetStatus _status, out PetStatus _maxStatus);
 
         _status.Mood = UpdateMood(this.transform.position, radius, _maxStatus.Mood);
     }
 
     private void UpdateHunger()
     {
-        PetStatus _status = null;
-        PetStatus _maxStatus = null;
-        pet.GetStatus(out _status, out _maxStatus);
+
+        pet.GetStatus(out PetStatus _status, out PetStatus _maxStatus);
 
         _status.Hunger -= 1;
         if (_status.Hunger < _maxStatus.Hunger / 2) //hunger is lesser than half 
         {
-            print("Hunger");
             OnHungerCallback?.Invoke(); //pet is hunger
+        }
+    }
+
+    private void UpdateBathroom() //Bathroom will be updated every after pet use pot food
+    {
+        pet.GetStatus(out PetStatus _status, out PetStatus _maxStatus);
+        if (_status.Bathroom < _maxStatus.Bathroom / 2) //is lesser than half 
+        {
+            OnBathroomCallback?.Invoke();
         }
     }
 
