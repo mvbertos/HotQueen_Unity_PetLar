@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 93179152}
   - component: {fileID: 93179153}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: PetCollision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -67,7 +67,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1036705499}
   - component: {fileID: 1036705500}
-  m_Layer: 20
+  m_Layer: 0
   m_Name: GrabCollision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +113,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1970229170}
-  m_Layer: 20
+  m_Layer: 0
   m_Name: Collision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,7 +153,7 @@ GameObject:
   - component: {fileID: 6164205618652383934}
   - component: {fileID: 8712940689271639994}
   - component: {fileID: 6723969952448166849}
-  m_Layer: 20
+  m_Layer: 0
   m_Name: Pet
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -247,9 +247,9 @@ MonoBehaviour:
   pet: {fileID: 843357897}
   statusManager: {fileID: 41245127816401537}
   movementation: {fileID: 6723969952448166849}
-  foodLayerMask:
+  interactingLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
 --- !u!114 &843357897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,7 +328,7 @@ GameObject:
   m_Component:
   - component: {fileID: 41245128436227920}
   - component: {fileID: 41245128436227921}
-  m_Layer: 20
+  m_Layer: 0
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -411,7 +411,7 @@ GameObject:
   - component: {fileID: 5658830757191294452}
   - component: {fileID: 5658830757191294442}
   - component: {fileID: 5658830757191294443}
-  m_Layer: 20
+  m_Layer: 0
   m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -545,7 +545,7 @@ GameObject:
   - component: {fileID: 5658830757239185774}
   - component: {fileID: 5658830757239185772}
   - component: {fileID: 5658830757239185773}
-  m_Layer: 20
+  m_Layer: 0
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -620,7 +620,7 @@ GameObject:
   - component: {fileID: 5658830757449478469}
   - component: {fileID: 5658830757449478459}
   - component: {fileID: 5658830757449478468}
-  m_Layer: 20
+  m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -693,7 +693,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5658830757494318818}
-  m_Layer: 20
+  m_Layer: 0
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -733,7 +733,7 @@ GameObject:
   - component: {fileID: 5658830757740000370}
   - component: {fileID: 5658830757740000371}
   - component: {fileID: 4979509058417092103}
-  m_Layer: 20
+  m_Layer: 0
   m_Name: PetInformation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -845,7 +845,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5658830758962033023}
-  m_Layer: 20
+  m_Layer: 0
   m_Name: Handle Slide Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -881,7 +881,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5658830759100841551}
   - component: {fileID: 5658830759100841550}
-  m_Layer: 20
+  m_Layer: 0
   m_Name: MoodBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -971,7 +971,7 @@ GameObject:
   m_Component:
   - component: {fileID: 97790810026502858}
   - component: {fileID: 1736755808706651631}
-  m_Layer: 20
+  m_Layer: 0
   m_Name: GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}

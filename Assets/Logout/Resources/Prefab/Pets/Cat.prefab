@@ -101,12 +101,12 @@ PrefabInstance:
     - target: {fileID: 41245127816401549, guid: 68c3f92be8c5db845a873964febe4dd8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.55
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 41245127816401549, guid: 68c3f92be8c5db845a873964febe4dd8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 41245127816401549, guid: 68c3f92be8c5db845a873964febe4dd8,
         type: 3}
@@ -151,7 +151,7 @@ PrefabInstance:
     - target: {fileID: 41245127816401551, guid: 68c3f92be8c5db845a873964febe4dd8,
         type: 3}
       propertyPath: m_Name
-      value: Cat
+      value: Pet
       objectReference: {fileID: 0}
     - target: {fileID: 1736755808706651631, guid: 68c3f92be8c5db845a873964febe4dd8,
         type: 3}
@@ -168,6 +168,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6364446130106071276, guid: 68c3f92be8c5db845a873964febe4dd8,
+        type: 3}
+      propertyPath: bathroomLayerMask.m_Bits
+      value: 128
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4396709700427253320, guid: 68c3f92be8c5db845a873964febe4dd8, type: 3}

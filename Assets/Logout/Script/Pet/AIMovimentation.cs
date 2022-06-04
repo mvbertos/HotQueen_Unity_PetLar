@@ -40,13 +40,14 @@ public class AIMovimentation : MonoBehaviour
             SetDestination(target.position, OnCloseToTarget);
         };
     }
+
     public void GoInteract(Transform target, AIInteraction OnInteract, LayerMask interactionLayer)
     {
         OnUpdate = () =>
         {
             SetDestination(target.position);
             RaycastHit2D hit = Physics2D.Raycast(this.transform.position, target.position - this.transform.position, 1, interactionLayer);
-            if (hit.collider)
+            if (hit && hit.collider.attachedRigidbody.gameObject == target.gameObject)
             {
                 OnInteract?.Invoke(hit);
                 OnUpdate = null;

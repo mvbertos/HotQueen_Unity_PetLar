@@ -57,7 +57,8 @@ public class PetLarUtils : MonoBehaviour
             ComplexType closestSpot = default(ComplexType);
             foreach (ComplexType item in targets)
             {
-                if (extra_condition(item))
+                if (extra_condition != null && extra_condition(item))
+                {
                     if (closestSpot == null)
                     {
                         closestSpot = item;
@@ -66,6 +67,18 @@ public class PetLarUtils : MonoBehaviour
                     {
                         closestSpot = item;
                     }
+                }
+                else
+                {
+                    if (closestSpot == null)
+                    {
+                        closestSpot = item;
+                    }
+                    else if (Vector2.Distance(origin.position, item.transform.position) < Vector2.Distance(origin.position, closestSpot.transform.position))
+                    {
+                        closestSpot = item;
+                    }
+                }
             }
             return closestSpot;
         }
