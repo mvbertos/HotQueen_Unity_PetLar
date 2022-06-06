@@ -10,6 +10,7 @@ public class RegisterItem : EditorWindow
     public string description;
     public float cost;
     public ItemType type;
+    public GameObject prefab;
 
     [MenuItem("Window/Register Item")]
     public static void Show()
@@ -17,16 +18,19 @@ public class RegisterItem : EditorWindow
         GetWindow(typeof(RegisterItem));
     }
 
-    private void OnGUI() {
+    private void OnGUI()
+    {
         image = (Sprite)EditorGUILayout.ObjectField("Image", image, typeof(Sprite), false);
         name = EditorGUILayout.TextField("Name", name);
         description = EditorGUILayout.TextField("Description", description);
         cost = EditorGUILayout.FloatField("Cost", cost);
         type = (ItemType)EditorGUILayout.EnumPopup("Type", type);
+        prefab = (GameObject)EditorGUILayout.ObjectField("Prefab", prefab, typeof(GameObject), false);
 
-        if (GUILayout.Button("Register")) {
+        if (GUILayout.Button("Register"))
+        {
             ItemData itemData = new ItemData(image, name, description, cost, type);
-            ItemContainer.Save(itemData);
+            ItemContainer.Save(itemData, prefab);
         }
     }
 }
