@@ -141,6 +141,9 @@ public class PlayerInputs : MonoBehaviour
     }
     public void Interact(Ray ray, Action<RaycastHit2D> OnInteract)
     {
-        Interact(ray.origin, OnInteract, ray.direction);
+        //raycast to interact with objects
+        RaycastHit2D hit = Physics2D.GetRayIntersection(ray, 100, layerInteraction);
+
+        OnInteract?.Invoke(hit);
     }
 }

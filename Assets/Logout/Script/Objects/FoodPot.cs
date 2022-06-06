@@ -15,7 +15,7 @@ public class FoodPot : MonoBehaviour
 
     public void Fill()
     {
-        ONG ong = GameObject.Find("ONG").GetComponent<ONG>();
+        ONG ong = GameObject.FindObjectOfType<ONG>();
         if (ong.Food >= maxFood)
         {
             current_food_amount = 10;
