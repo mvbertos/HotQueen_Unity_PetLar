@@ -85,6 +85,11 @@ public class StoreManager : MonoBehaviour
         //if player have money
         //reduce money from the player
         //instantiate prefab in the world
-        Instantiate(prefab, Vector3.zero, Quaternion.identity);
+        ONG playerONG = GameObject.FindObjectOfType<ONG>();
+        if (playerONG.Money >= cost)
+        {
+            playerONG.Money -= cost;
+            Instantiate(prefab, Vector3.zero, Quaternion.identity);
+        }
     }
 }

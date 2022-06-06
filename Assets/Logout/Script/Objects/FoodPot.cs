@@ -15,15 +15,16 @@ public class FoodPot : MonoBehaviour
 
     public void Fill()
     {
-        if (GameManager._ong.food >= maxFood)
+        ONG ong = GameObject.Find("ONG").GetComponent<ONG>();
+        if (ong.Food >= maxFood)
         {
             current_food_amount = 10;
-            GameManager._ong.food -= maxFood;
+            ong.Food -= maxFood;
         }
-        else if (GameManager._ong.food > 0 && GameManager._ong.food <= maxFood)
+        else if (ong.Food > 0 && ong.Food <= maxFood)
         {
-            current_food_amount = GameManager._ong.food;
-            GameManager._ong.food = 0;
+            current_food_amount = ong.Food;
+            ong.Food = 0;
         }
         else
         {

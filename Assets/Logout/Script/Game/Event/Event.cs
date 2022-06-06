@@ -31,7 +31,7 @@ public class Event
 /// </summary>
 public class Rescue : Event
 {
-    Pet randomPet;
+    private Pet randomPet = null;
     public Rescue()
     {
         randomPet = GameManager.petArray.ToArray()[Random.Range(0,GameManager.petArray.Length-1)];

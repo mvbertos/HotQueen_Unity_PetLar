@@ -13,28 +13,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Pet[] petReferences;//filled with prefabs
     public static Pet[] petArray { private set; get; }// same as petReferences but static
     private static readonly String[] petNames = { "Alberto", "Samanta", "Poly", "Nino", "Amaterasu" }; //list of names to be used
-
-    public class ONG
-    {
-        public float MAX_VALUE = 100;
-        public float mood, food, money;
-        public ONG()
-        {
-            this.mood = MAX_VALUE;
-            this.food = MAX_VALUE;
-            this.money = 1000;
-        }
-    }
-
-    public static ONG _ong { private set; get; }
-
-    private void Awake()
-    {
-        _ong = new ONG();
-        instance = this;
-        petArray = petReferences;
-    }
-
     
     //Pets
     public static void AddNewPetToWorld(Pet pet)

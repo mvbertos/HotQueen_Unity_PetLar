@@ -1577,7 +1577,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1404455264}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.9999907
+  m_Size: 0.99862266
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -6189,7 +6189,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00007897183}
+  m_AnchoredPosition: {x: 0, y: 0.000025363343}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1069645781
@@ -6894,9 +6894,11 @@ GameObject:
   - component: {fileID: 1166482738}
   - component: {fileID: 1166482735}
   - component: {fileID: 1166482734}
+  - component: {fileID: 1166482739}
+  - component: {fileID: 1166482740}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6986,7 +6988,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layerInteraction:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
 --- !u!114 &1166482738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7000,8 +7002,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInputs: {fileID: 1166482737}
-  playerMouse: {fileID: 0}
+  playerMouse: {fileID: 1166482740}
   trellowInterface: {fileID: 1297866123}
+--- !u!114 &1166482739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1166482732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e39b390331fba549b56ccc2ee3d46ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  money: 1000
+  food: 1000
+--- !u!114 &1166482740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1166482732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c4b5578ece0f134398f41363a1ef469, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseRole: 0
+  mouseState: 0
+  playerInputs: {fileID: 1166482737}
+  playerDragObject: {fileID: 1166482735}
 --- !u!1 &1168841015
 GameObject:
   m_ObjectHideFlags: 0
@@ -7215,8 +7247,10 @@ MonoBehaviour:
   productParent: {fileID: 1069645780}
   productButton: {fileID: 5294535632213848246, guid: df8045348e71b234d8d19232f50c435a,
     type: 3}
-  items:
-  - {fileID: 5899715833862164212, guid: 7af32d4f9b09d164e80866228481a2b1, type: 3}
+  title: {fileID: 775244549}
+  description: {fileID: 818169536}
+  cost: {fileID: 1460422422}
+  buyButton: {fileID: 603088148}
 --- !u!114 &1172905200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14631,7 +14665,7 @@ GameObject:
   - component: {fileID: 2032297110}
   - component: {fileID: 2032297112}
   m_Layer: 0
-  m_Name: Description
+  m_Name: More
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
