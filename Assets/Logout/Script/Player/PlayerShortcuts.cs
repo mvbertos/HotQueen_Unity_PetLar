@@ -9,6 +9,7 @@ public class PlayerShortcuts : MonoBehaviour
 {
     //PLAYER REFERENCES
     [SerializeField] private PlayerInputs playerInputs;
+    [SerializeField] private PlayerMouse playerMouse;
 
     //SCREEN REFERENCES
     [SerializeField] private TrellowInterface trellowInterface;
@@ -22,12 +23,12 @@ public class PlayerShortcuts : MonoBehaviour
 
     private void ChangeToolToTrigger()
     {
-        playerInputs.mouseRole = MouseRole.Trigger;
+        playerMouse.SetMouseRole(PlayerMouse.MouseRole.Trigger);
     }
 
     private void ChangeToolToGrab()
     {
-        playerInputs.mouseRole = MouseRole.Drag;
+        playerMouse.SetMouseRole(PlayerMouse.MouseRole.Drag);
     }
 
     private void EnableMinigameScreen()

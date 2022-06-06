@@ -10,6 +10,9 @@ public class PlayerInputs : MonoBehaviour
     private WindowsInputs m_playerInputs;
     private WindowsInputs.PlayerControlsActions playerControls;
 
+    //Layers
+    [SerializeField] private LayerMask layerInteraction;
+
     //MOUSE CALLBACKS
     public Action OnMouseLeftDown;
     public Action OnMouseRightDown;
@@ -25,9 +28,6 @@ public class PlayerInputs : MonoBehaviour
     public Action OnSixthhortcut;
     public Action OnSeventhShortcut;
     public Action OnEighthShortcut;
-
-    //MOUSE SETTINGS
-    [HideInInspector] public MouseRole mouseRole;
 
     private void Awake()
     {
@@ -129,9 +129,18 @@ public class PlayerInputs : MonoBehaviour
     }
 
     #endregion
-}
-public enum MouseRole
-{
-    Drag,
-    Trigger,
+
+
+    public void Interact(Vector2 position, Action<RaycastHit2D> OnInteract, Vector2 direction = default(Vector2))
+    {
+        //raycast to interact with objects
+        Ray ray = new Ray(position, direction);
+        RaycastHit2D hit = Physics2D.GetRayIntersection(ray, 100, layerInteraction);
+
+        OnInteract?.Invoke(hit);
+    }
+    public void Interact(Ray ray, Action<RaycastHit2D> OnInteract)
+    {
+        Interact(ray.origin, OnInteract, ray.direction);
+    }
 }

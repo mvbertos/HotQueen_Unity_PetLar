@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 
 public class NeedsHandler : MonoBehaviour
@@ -11,6 +12,7 @@ public class NeedsHandler : MonoBehaviour
     [SerializeField] private StatusManager statusManager;
     [SerializeField] private AIMovimentation movementation;
     [SerializeField] private LayerMask interactLayer;
+    private Dictionary<String, Coroutine> currentCoroutines = new Dictionary<string, Coroutine>();
 
     private void OnEnable()
     {
@@ -20,8 +22,6 @@ public class NeedsHandler : MonoBehaviour
         statusManager.OnFunCallback += LookForToy;
     }
 
-
-
     private void OnDisable()
     {
         statusManager.OnHungerCallback -= LookForFood;
@@ -30,18 +30,39 @@ public class NeedsHandler : MonoBehaviour
         statusManager.OnFunCallback -= LookForToy;
     }
 
-
-
     //Sleep
     #region Sleep
     private void LookForBed()
     {
         Bed target = ClosestObject<Bed>();
 
-        //return if is null
-        if (target)
+        if (target && !currentCoroutines.ContainsKey("Rest"))
         {
-            movementation.GoInteract(target.transform, UseBed, interactLayer);
+            currentCoroutines.Add("Rest", StartCoroutine(Rest(target)));
+        }
+    }
+
+    //loop while target is not null and pet sleep is not full
+    private IEnumerator Rest(Bed target)
+    {
+        while (target)
+        {
+            pet.GetStatus(out PetStatus status, out PetStatus maxStatus);
+            if (status.Sleep < maxStatus.Sleep)
+            {
+                pet.state = PetState.Sleeping;
+                yield return new WaitForSeconds(1);
+                //return if is null
+                if (target)
+                {
+                    movementation.GoInteract(target.transform, UseBed, interactLayer);
+                }
+            }
+            else
+            {
+                pet.state = PetState.Idle;
+                break;
+            }
         }
     }
 
@@ -75,10 +96,8 @@ public class NeedsHandler : MonoBehaviour
         GameObject target = hit.collider.attachedRigidbody.gameObject;
         if (target.TryGetComponent<Toy>(out Toy toy))
         {
-            pet.GetStatus(out PetStatus petStatus, out PetStatus maxStatus);
-            petStatus.Fun += 10;
-            pet.SetStatus(petStatus);
-            toy.Use();
+            pet.AddStatus(0, 0, 0, 0, toy.Use());
+            hit.collider.attachedRigidbody.AddForce(new Vector2(Random.Range(-1, 1), Random.Range(-1, 1)) * 25, ForceMode2D.Impulse);
         }
     }
 
@@ -109,6 +128,7 @@ public class NeedsHandler : MonoBehaviour
             pet.GetStatus(out PetStatus petStatus, out PetStatus maxStatus);
             petStatus.Bathroom = maxStatus.Bathroom;
             pet.SetStatus(petStatus);
+
             //use bathroom
             bathroom.Use();
         }

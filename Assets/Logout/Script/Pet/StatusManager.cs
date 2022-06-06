@@ -25,11 +25,24 @@ public class StatusManager : MonoBehaviour
 
     private void Start()
     {
-        //Handle status based in 
-        PetLarUtils.LoopTimerEvent(UpdateHunger, 1, "UpdateHunger");
-        PetLarUtils.LoopTimerEvent(UpdateBathroom, 1, "UpdateBathroom");
-        PetLarUtils.LoopTimerEvent(UpdateSleep, 1, "UpdateSleep");
-        PetLarUtils.LoopTimerEvent(UpdateFun, 1, "UpdateFun");
+        StartCoroutine(HandleStatus());
+        // //Handle status based in 
+        // PetLarUtils.LoopTimerEvent(UpdateHunger, 1, "UpdateHunger");
+        // PetLarUtils.LoopTimerEvent(UpdateBathroom, 1, "UpdateBathroom");
+        // PetLarUtils.LoopTimerEvent(UpdateSleep, 1, "UpdateSleep");
+        // PetLarUtils.LoopTimerEvent(UpdateFun, 1, "UpdateFun");
+    }
+
+    private IEnumerator HandleStatus()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1);
+            UpdateHunger();
+            UpdateBathroom();
+            UpdateSleep();
+            UpdateFun();
+        }
     }
 
     private void UpdateFun()
@@ -38,7 +51,7 @@ public class StatusManager : MonoBehaviour
         _status.Fun -= 1;
         pet.SetStatus(_status);
 
-        if (!IsHungry() && !NeedBathroom() && !IsSleepy())
+        if (!IsHungry() && !NeedBathroom() && pet.state != PetState.Sleeping)
         {
             OnFunCallback?.Invoke();
         }
@@ -56,6 +69,7 @@ public class StatusManager : MonoBehaviour
     private void UpdateSleep()
     {
         pet.AddStatus(0, 0, 0, -1, 0);
+
         if (IsSleepy())
         {
             OnSleepCallback?.Invoke();

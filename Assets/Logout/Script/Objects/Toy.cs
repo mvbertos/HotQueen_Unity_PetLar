@@ -15,7 +15,7 @@ public class Toy : MonoBehaviour
 
     public float Use()
     {
-        //add force to the ball
-        return  funRegeneration;
+
+        return funRegeneration;
     }
 }

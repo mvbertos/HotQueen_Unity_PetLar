@@ -15,10 +15,14 @@ public class Pet : MonoBehaviour
     private PetStatus status;
     private PetStatus maxStatus;
 
+    //petstate
+    public PetState state;
+
 
     private void Start()
     {
         informationDisplayer.UpdateInformation(data.Name, 100);
+        state = PetState.Idle;
         InitStatus();
     }
 
@@ -58,7 +62,7 @@ public class Pet : MonoBehaviour
     private void InitStatus()
     {
         //Health and Stuff
-        status = new PetStatus(100, 100, 100, 100 / 3, 100);
+        status = new PetStatus(100, 100, 100, 100, 100);
         maxStatus = new PetStatus(100, 100, 100, 100, 100);
     }
 }
@@ -86,4 +90,15 @@ public enum Personality
 {
     Playfull,
     Angry,
+}
+
+public enum PetState
+{
+    Idle,
+    Walking,
+    Eating,
+    Sleeping,
+    Bathroom,
+    Playing,
+    Dead,
 }
