@@ -11,8 +11,7 @@ public class FoodPot : MonoBehaviour
     [SerializeField] private Sprite emptyPot;
     [SerializeField] private Sprite fullPot;
     [SerializeField] private SpriteRenderer spriteRenderer;
-
-
+    
     public void Fill()
     {
         ONG ong = GameObject.FindObjectOfType<ONG>();

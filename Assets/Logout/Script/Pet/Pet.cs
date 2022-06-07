@@ -9,6 +9,7 @@ public class Pet : MonoBehaviour
     //pet information
     [SerializeField] private PetData data;
     [SerializeField] private InformationDisplayer informationDisplayer;
+    
 
     //pet status
     //mood will be reduced, when pet is nearby bad things like empty food pot, dirty corner and else.

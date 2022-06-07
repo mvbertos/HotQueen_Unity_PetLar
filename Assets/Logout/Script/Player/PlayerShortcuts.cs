@@ -13,12 +13,19 @@ public class PlayerShortcuts : MonoBehaviour
 
     //SCREEN REFERENCES
     [SerializeField] private TrellowInterface trellowInterface;
+    [SerializeField] private StoreManager storeInterface;
 
     private void Start()
     {
         playerInputs.OnSeventhShortcut += EnableMinigameScreen;
+        playerInputs.OnEighthShortcut += EnableStoreScreen;
         playerInputs.OnFirstShortcut += ChangeToolToGrab;
         playerInputs.OnSecondShortcut += ChangeToolToTrigger;
+    }
+
+    private void EnableStoreScreen()
+    {
+        storeInterface.Show();
     }
 
     private void ChangeToolToTrigger()

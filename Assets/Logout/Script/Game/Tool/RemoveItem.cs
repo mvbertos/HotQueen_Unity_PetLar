@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+#if UNITY_EDITOR
 public class RemoveItem : EditorWindow
 {
     private string name;
@@ -22,3 +23,4 @@ public class RemoveItem : EditorWindow
         }
     }
 }
+#endif

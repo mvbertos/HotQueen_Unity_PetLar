@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+//if unity editor
+#if UNITY_EDITOR
 public class RegisterItem : EditorWindow
 {
     public Sprite image;
@@ -34,3 +36,4 @@ public class RegisterItem : EditorWindow
         }
     }
 }
+#endif

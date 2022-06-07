@@ -9,6 +9,7 @@ public class AIMovimentation : MonoBehaviour
 {
     private NavMeshAgent agent;
     private Action OnUpdate;
+    [SerializeField] private Animator animator;
     public delegate void AIInteraction(RaycastHit2D hit);
 
     private void Start()
@@ -20,6 +21,7 @@ public class AIMovimentation : MonoBehaviour
 
     void Update()
     {
+        animator.SetFloat("Velocity", agent.velocity.normalized.magnitude);
         OnUpdate?.Invoke();
     }
 

@@ -7,6 +7,8 @@ using TMPro;
 
 public class StoreManager : MonoBehaviour
 {
+    //UI CONTENT
+    [SerializeField] private GameObject storeContent;
     //CATALOG
     [SerializeField] private Transform catalogParent;
     [SerializeField] private Button catalogButton;
@@ -23,6 +25,16 @@ public class StoreManager : MonoBehaviour
     private void Start()
     {
         InitCatalog();
+    }
+
+    public void Show()
+    {
+        storeContent.SetActive(true);
+    }
+
+    public void Hide()
+    {
+        storeContent.SetActive(false);
     }
 
     private void InitCatalog()

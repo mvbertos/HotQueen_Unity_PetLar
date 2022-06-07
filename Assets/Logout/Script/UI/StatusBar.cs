@@ -7,16 +7,11 @@ using TMPro;
 public class StatusBar : MonoBehaviour
 {
     [SerializeField] private Slider mood_slider, food_slider;
-    [SerializeField] private TMP_Text money_Text;
+    [SerializeField] private TMP_Text moneyText;
     private void Update()
     {
-        // if (mood_slider)
-        //     mood_slider.value = GameManager._ong.mood / GameManager._ong.MAX_VALUE;
-
-        // if (money_Text)
-        //     money_Text.text = "$" + GameManager._ong.money.ToString();
-
-        // if (food_slider)
-        //     food_slider.value = GameManager._ong.food / GameManager._ong.MAX_VALUE;
+        //get ong
+        ONG ong = GameObject.FindObjectOfType<ONG>();
+        moneyText.text = "$ " + ong.Money.ToString();
     }
 }
