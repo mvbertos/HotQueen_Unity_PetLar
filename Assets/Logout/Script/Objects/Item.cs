@@ -8,6 +8,7 @@ public enum ItemType
     Bed,
     Toy,
     Bathroom,
+    Food,
 }
 
 public class Item : MonoBehaviour

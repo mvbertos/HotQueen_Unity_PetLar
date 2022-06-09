@@ -5,7 +5,10 @@ using UnityEngine;
 public class ONG : MonoBehaviour
 {
     [SerializeField] private float money = 1000;
+    [SerializeField] private float maxFood = 100;
     [SerializeField] private float food = 0;
+
+    public float maxFoodValue { get { return maxFood; } }
 
     public float Food
     {
