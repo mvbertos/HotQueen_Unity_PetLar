@@ -13,18 +13,14 @@ public class Food : MonoBehaviour
     {
         Small,
         Medium,
-        Large,        
+        Large,
     }
 
     [SerializeField] private Size size = 0;
-    private float foodAmount = 0;
 
-    private void Start() {
-        InitFoodAmount();
-    }
-
-    private void InitFoodAmount()
+    public float GetFoodAmount()
     {
+        float foodAmount = 0;
         switch (size)
         {
             case Size.Small:
@@ -37,5 +33,6 @@ public class Food : MonoBehaviour
                 foodAmount = 100;
                 break;
         }
+        return foodAmount;
     }
 }

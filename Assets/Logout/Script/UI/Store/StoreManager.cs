@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class StoreManager : MonoBehaviour
 {
@@ -96,12 +97,28 @@ public class StoreManager : MonoBehaviour
     {
         //if player have money
         //reduce money from the player
-        //instantiate prefab in the world
         ONG playerONG = GameObject.FindObjectOfType<ONG>();
         if (playerONG.Money >= cost)
         {
             playerONG.Money -= cost;
-            Instantiate(prefab, Vector3.zero, Quaternion.identity);
+
+            //if item bought is type of food
+            //add food to the ong food
+            if (prefab.TryGetComponent<Food>(out Food food))
+            {
+                ONG ong = GameObject.FindObjectOfType<ONG>();
+                ong.Food += food.GetFoodAmount();
+            }
+            else
+            {
+                //instantiate prefab in the world
+                //grab object to player in wolrd the way player likes
+                //instantiate prefab in the world
+                GameObject instance = Instantiate(prefab, Vector2.zero, Quaternion.identity);
+                PlayerDragObject playerDragObject = FindObjectOfType<PlayerDragObject>();
+                playerDragObject.GrabObject(instance.GetComponent<Rigidbody2D>());
+            }
+            Hide();
         }
     }
 }
