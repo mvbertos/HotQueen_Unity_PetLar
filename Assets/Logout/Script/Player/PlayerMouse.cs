@@ -19,6 +19,7 @@ public class PlayerMouse : MonoBehaviour
         Dragging,
         Clicked,
     }
+    [System.Serializable]
     public struct MouseCursor
     {
         public Texture2D Pressing;
@@ -37,11 +38,37 @@ public class PlayerMouse : MonoBehaviour
     {
         mouseRole = MouseRole.Drag;
         mouseState = MouseState.Idle;
-        Cursor.SetCursor(mouseCursor.Idle, Vector2.zero, CursorMode.Auto);
+        SetMouseState(mouseState);
+
         //register inputs
         playerInputs.OnMouseLeftDown += OnMouseLeftPressedCallback;
         playerInputs.OnMouseLeftUp += OnMouseLeftUpCallback;
         playerInputs.OnMouseRightDown += OnMouseRightClickCallback;
+    }
+
+    private void Update()
+    {
+        HoveringTrigger();
+    }
+
+    private void HoveringTrigger()
+    {
+        //check if mouse is hovering over an object
+        Ray mouseRay = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        if (Physics2D.GetRayIntersection(mouseRay, 10, playerInputs.LayerInteraction))
+        {
+            if (mouseState == MouseState.Idle)
+            {
+                SetMouseState(MouseState.Hovering);
+            }
+        }
+        else
+        {
+            if (mouseState == MouseState.Hovering)
+            {
+                SetMouseState(MouseState.Idle);
+            }
+        }
     }
 
     private void OnMouseRightClickCallback()
@@ -55,10 +82,12 @@ public class PlayerMouse : MonoBehaviour
         {
             playerDragObject.ReleaseObject();
         }
+        SetMouseState(MouseState.Idle);
     }
 
     private void OnMouseLeftPressedCallback()
     {
+        SetMouseState(MouseState.Clicked);
         Ray mousePosition = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         playerInputs.Interact(mousePosition, (hit) =>
         {
@@ -69,6 +98,7 @@ public class PlayerMouse : MonoBehaviour
                     case MouseRole.Drag:
                         if (hit.rigidbody)
                         {
+                            SetMouseState(MouseState.Dragging);
                             playerDragObject.GrabObject(hit.rigidbody);
                         }
                         break;
@@ -81,6 +111,7 @@ public class PlayerMouse : MonoBehaviour
                 }
             }
         });
+        
     }
 
     private void Interact(GameObject gameObject)
@@ -103,23 +134,25 @@ public class PlayerMouse : MonoBehaviour
     public void SetMouseState(MouseState state)
     {
         mouseState = state;
+        SetMouseCursor(mouseState);
     }
 
     public void SetMouseCursor(MouseState state)
     {
+        Vector2 offset = new Vector2(-10, -10);
         switch (state)
         {
             case MouseState.Idle:
-                Cursor.SetCursor(mouseCursor.Idle, Vector2.zero, CursorMode.Auto);
+                Cursor.SetCursor(mouseCursor.Idle, offset, CursorMode.Auto);
                 break;
             case MouseState.Hovering:
-                Cursor.SetCursor(mouseCursor.Hovering, Vector2.zero, CursorMode.Auto);
+                Cursor.SetCursor(mouseCursor.Hovering, offset, CursorMode.Auto);
                 break;
             case MouseState.Dragging:
-                Cursor.SetCursor(mouseCursor.Grabbing, Vector2.zero, CursorMode.Auto);
+                Cursor.SetCursor(mouseCursor.Grabbing, offset, CursorMode.Auto);
                 break;
             case MouseState.Clicked:
-                Cursor.SetCursor(mouseCursor.Pressing, Vector2.zero, CursorMode.Auto);
+                Cursor.SetCursor(mouseCursor.Pressing, offset, CursorMode.Auto);
                 break;
         }
     }

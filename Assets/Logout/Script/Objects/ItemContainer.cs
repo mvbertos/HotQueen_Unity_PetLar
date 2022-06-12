@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 public class ItemContainer
 {
 
-    private static string ITEM_PATH = Application.persistentDataPath + "/Items.json";
+    private static string ITEM_PATH = Application.streamingAssetsPath+ "/JSON/" + "Items.json";
 
     [System.Serializable]
     public class SaveObject

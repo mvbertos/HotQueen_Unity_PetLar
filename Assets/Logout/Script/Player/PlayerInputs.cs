@@ -12,6 +12,7 @@ public class PlayerInputs : MonoBehaviour
 
     //Layers
     [SerializeField] private LayerMask layerInteraction;
+    public LayerMask LayerInteraction { get { return layerInteraction; } }
 
     //MOUSE CALLBACKS
     public Action OnMouseLeftDown;
