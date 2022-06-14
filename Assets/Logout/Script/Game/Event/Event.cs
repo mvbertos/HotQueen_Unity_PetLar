@@ -34,7 +34,7 @@ public class Rescue : Event
     private Pet randomPet = null;
     public Rescue()
     {
-        randomPet = GameManager.petArray.ToArray()[Random.Range(0,GameManager.petArray.Length-1)];
+        randomPet = GameManager.petArray.ToArray()[Random.Range(0, GameManager.petArray.Length - 1)];
         //Set event_sprite as it´s appearance
         EventSprite = randomPet.GetData().Picture;
         //set name
@@ -69,16 +69,17 @@ public class Donation : Event
         EventName = "Post de doação";
         EventDescription = "Faça um post para que outros ajudem sua causa!";
 
-        TimeRange = new Vector2(20, 25);
+        TimeRange = new Vector2(2, 4);
     }
 
     public override void ConfirmEvent()
     {
-        LoopReward();
+        RewardMoney();
+        //LoopReward();
     }
     public override void DeclineEvent()
     {
-        TimerEvent.StopTimer("Reward");
+        //TimerEvent.StopTimer("Reward");
     }
     private void LoopReward()
     {
@@ -87,8 +88,10 @@ public class Donation : Event
     }
     private void RewardMoney()
     {
-        //increase player money
-        Debug.Log("increase money");
+        //find object of type ong in the scene
+        //increase ong money
+        ONG ong = GameObject.FindObjectOfType<ONG>();
+        ong.Money += PriceValue;
     }
 }
 
@@ -101,5 +104,4 @@ public class Adoption : Event
         EventDescription = "Doe um bixinho resgatado!";
         TimeRange = new Vector2(1, 2);
     }
-
 }

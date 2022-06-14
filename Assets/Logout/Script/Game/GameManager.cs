@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Pet[] petReferences;//filled with prefabs
     public static Pet[] petArray { private set; get; }// same as petReferences but static
     private static readonly String[] petNames = { "Alberto", "Samanta", "Poly", "Nino", "Amaterasu" }; //list of names to be used
-    
+
     //Pets
     public static void AddNewPetToWorld(Pet pet)
     {
@@ -27,6 +27,16 @@ public class GameManager : MonoBehaviour
         foreach (var pet in GameObject.FindObjectsOfType<Pet>())
         {
             petInstances.Add(pet);
+        }
+    }
+
+    public static void GameOver()
+    {
+        ONG ong = GameObject.FindObjectOfType<ONG>();
+        if (ong.Money <= 0)
+        {
+            //Game Over
+            Debug.Log("Game Over");
         }
     }
 }

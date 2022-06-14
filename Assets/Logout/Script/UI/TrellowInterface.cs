@@ -3,26 +3,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
+//trellow make possible the complition of tasks in the game
+//tasks can be, make money, rescue a pet or adopt a pet
+//after it´s conclusion, it will be removed from the list and added after a time to a list of events
+//the time will be decided by the cooldown of the event
 public class TrellowInterface : MonoBehaviour
 {
+    public class TrellowTask
+    {
+        public Event Event;
+        public TaskButton TaskButtonInstance;
+        public float RefTime;
 
-    List<Event> tasks = new List<Event>();
+        public TrellowTask(Event task, TaskButton taskButtonInstance)
+        {
+            Event = task;
+            TaskButtonInstance = taskButtonInstance;
+            RefTime = 0f;
+        }
+    }
+
+    private List<Event> taskEvents = new List<Event>();
+    private List<TrellowTask> tasksToExecute = new List<TrellowTask>();
     Dictionary<Event, TaskButton> taskButtonInstances = new Dictionary<Event, TaskButton>();
     [SerializeField] private TaskButton buttonRef;
     [SerializeField] private Transform content;
     [SerializeField] private Transform todo;
     [SerializeField] private Transform doing;
     [SerializeField] private Transform done;
-    [SerializeField] private MG_Adoption mG_AdoptionRef;
+    [SerializeField] private MG_Adoption mg_AdoptionRef;
     private Action OnUpdate;
 
     private void Start()
     {
-        Donation donation = new Donation(100);
+        Donation donation = new Donation(10);
         Adoption adoption = new Adoption();
-        AddNewTask(donation);
-        AddNewTask(adoption);
+        AddNewTask(new Event[] { donation, adoption });
     }
 
     public void Hide()
@@ -37,34 +55,81 @@ public class TrellowInterface : MonoBehaviour
 
     private void AddNewTask(Event task)
     {
-        tasks.Add(task);
-        UpdateTasks();
+        taskEvents.Add(task);
+        InitTasks();
+    }
+
+    private void AddNewTask(Event[] tasks)
+    {
+        foreach (Event task in tasks)
+        {
+            taskEvents.Add(task);
+        }
+        InitTasks();
+    }
+
+    private void RemoveTask(TrellowTask task)
+    {
+        RemoveTask(task.Event);
+        tasksToExecute.Remove(task);
     }
 
     private void RemoveTask(Event task)
     {
-        //remove task from list
-        tasks.Remove(task);
         //destroy button
         if (taskButtonInstances.ContainsKey(task))
         {
             task.DeclineEvent();
             TaskButton instance = taskButtonInstances[task];
             GameObject.Destroy(instance.gameObject);
+
+            //repeat
+            TimerEvent.Create(() =>
+            {
+                AddNewTask(task);
+            }, Random.Range(task.TimeRange.x, task.TimeRange.y));
+
             taskButtonInstances.Remove(task);
         }
+
+        //remove task from list
+        taskEvents.Remove(task);
     }
 
     private void Update()
     {
-        OnUpdate?.Invoke();
+        //for each task
+        //register action to update method
+        foreach (TrellowTask task in tasksToExecute)
+        {
+            if (task.TaskButtonInstance.transform.parent == doing)
+            {
+                CompletingTask(ref task.RefTime, task.Event.TimeRange.y, task, task.TaskButtonInstance.taskSlider);
+            }
+            if (task.TaskButtonInstance.transform.parent == done)
+            {
+                if (task.Event is Donation)
+                {
+                    CompletedTask(ref task.RefTime, task.Event.TimeRange.y, task, task.TaskButtonInstance.taskSlider, true);
+                }
+                if (task.Event is Adoption)
+                {
+                    Instantiate(mg_AdoptionRef, new Vector3(), Quaternion.identity);
+                    CompletedTask(ref task.RefTime, task.Event.TimeRange.y, task, task.TaskButtonInstance.taskSlider, false);
+                }
+                else
+                {
+                    CompletedTask(ref task.RefTime, task.Event.TimeRange.y, task, task.TaskButtonInstance.taskSlider, false);
+                }
+            }
+        }
     }
 
-    private void UpdateTasks()
+    private void InitTasks()
     {
         //each item in task
         //instantiate new button 
-        foreach (Event task in tasks)
+        foreach (Event task in taskEvents)
         {
             if (!taskButtonInstances.ContainsKey(task))
             {
@@ -81,25 +146,21 @@ public class TrellowInterface : MonoBehaviour
                         //change parent
                         //init progress bar, based on time to be filled 
                         taskButton.transform.parent = doing;
-                        float reftimer = 0;
-                        //register action to update method
-                        if (task is Adoption)
-                        {
-                            OnUpdate = () => { CompletingTask(ref reftimer, task.TimeRange.y, task, taskButton.taskSlider, () => { Instantiate(mG_AdoptionRef); ConfirmEvent(task, taskButton); }); };
-                        }
-                        else
-                            OnUpdate = () => { CompletingTask(ref reftimer, task.TimeRange.y, task, taskButton.taskSlider, () => { ConfirmEvent(task, taskButton); }); };
+
+                        //add to the execute task list
+                        tasksToExecute.Add(new TrellowTask(task, taskButton));
                     }
                 });
             }
         }
     }
 
-    private void CompletingTask(ref float begin, float end, Event task, Slider slider, Action OnConcluded)
+    //it calculate the time to a task to be completed and return how much time passed
+    private void CompletingTask(ref float currentTime, float end, TrellowTask task, Slider slider)
     {
         //calculate bar
-        begin += Time.deltaTime;
-        float value = begin / (end);
+        currentTime += Time.deltaTime;
+        float value = currentTime / (end);
         value = Mathf.Clamp(value, 0, 1);
 
         //update slider
@@ -108,27 +169,32 @@ public class TrellowInterface : MonoBehaviour
         //execute concluded action
         if (value >= 1)
         {
-            OnConcluded?.Invoke();
-            OnUpdate = () => { ReceiveingReward(end, slider, () => { RemoveTask(task); OnUpdate = null; }); };
+            task.TaskButtonInstance.transform.parent = done;
         }
     }
 
-
-    private void ReceiveingReward(float end, Slider slider, Action OnConcluded)
+    private void CompletedTask(ref float currentTime, float end, TrellowTask task, Slider slider, bool loop)
     {
-        //calculate bar
-        slider.value -= Time.deltaTime / end;
-
-        if (slider.value <= 0)
+        if (loop)
         {
-            OnConcluded?.Invoke();
-            OnUpdate = null;
-        }
-    }
+            //calculate bar
+            currentTime -= Time.deltaTime;
+            float value = currentTime / (end);
+            value = Mathf.Clamp(value, 0, 1);
 
-    private void ConfirmEvent(Event evenRef, TaskButton button)
-    {
-        button.transform.parent = done;
-        evenRef.ConfirmEvent();
+            //update slider
+            slider.value = value;
+            task.Event.ConfirmEvent();
+
+            if (slider.value <= 0)
+            {
+                RemoveTask(task);
+            }
+        }
+        else
+        {
+            task.Event.ConfirmEvent();
+            RemoveTask(task);
+        }
     }
 }
