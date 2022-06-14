@@ -8,18 +8,26 @@ using System.Xml.Serialization;
 public class ItemContainer
 {
 
-    private static string ITEM_PATH = Application.streamingAssetsPath+ "/JSON/" + "Items.json";
+    private static string ITEM_PATH = Application.streamingAssetsPath + "/JSON/" + "Items.json";
 
     [System.Serializable]
     public class SaveObject
     {
-        public ItemData itemData;
-        public GameObject prefab;
+        public string imageLocation;
+        public string name;
+        public string description;
+        public float cost;
+        public ItemType type;
+        public string prefabLocation;
 
-        public SaveObject(ItemData itemDataList, GameObject prefab)
+        public SaveObject(string imageLocation, string name, string description, float cost, ItemType type, string prefabLocation)
         {
-            this.itemData = itemDataList;
-            this.prefab = prefab;
+            this.imageLocation = imageLocation;
+            this.name = name;
+            this.description = description;
+            this.cost = cost;
+            this.type = type;
+            this.prefabLocation = prefabLocation;
         }
     }
 
@@ -33,7 +41,7 @@ public class ItemContainer
             List<ItemData> itemDatas = new List<ItemData>();
             foreach (SaveObject save in saveObjects)
             {
-                itemDatas.Add(save.itemData);
+                //itemDatas.Add(save.itemData);
             }
             return itemDatas;
         }
@@ -42,7 +50,7 @@ public class ItemContainer
         {
             foreach (SaveObject save in saveObjects)
             {
-                if (save.itemData.name == name)
+                if (save.name == name)
                 {
                     return true;
                 }
@@ -54,14 +62,21 @@ public class ItemContainer
     public static void Save(ItemData data, GameObject prefab)
     {
         //create new saveObjectlist
-        SaveObject saveObject = new SaveObject(data, prefab);
+
+        SaveObject saveObject = new SaveObject(
+        "Textures/Items/" + data.name,
+        data.name,
+        data.description,
+        data.cost,
+        data.type,
+        "Prefab/Items/" + data.name);
         SaveObjectList saveObjectList = new SaveObjectList();
 
         //if file exists, overwrite it
         if (File.Exists(ITEM_PATH))
         {
             saveObjectList = Load(); //load the saveObjectList
-            if (saveObjectList.ContainsProduct(saveObject.itemData.name)) // if product already exist return 
+            if (saveObjectList.ContainsProduct(saveObject.name)) // if product already exist return 
             {
                 Debug.Log("Product already exists");
                 return;
@@ -87,7 +102,18 @@ public class ItemContainer
             foreach (SaveObject save in saveObjectList)
             {
                 {
-                    Save(save.itemData, save.prefab);
+                    Texture2D itemTexture = Resources.Load<Texture2D>(save.imageLocation);
+                    Sprite itemSprite = Sprite.Create(Resources.Load<Texture2D>(save.imageLocation), new Rect(0, 0, itemTexture.width, itemTexture.height), new Vector2(0.5f, 0.5f));
+
+                    ItemData itemData = new ItemData(
+                        itemSprite,
+                        save.name,
+                        save.description,
+                        save.cost,
+                        save.type);
+
+                    GameObject prefab = Resources.Load<GameObject>(save.prefabLocation);
+                    Save(itemData, prefab);
                 }
             }
         }
@@ -111,10 +137,11 @@ public class ItemContainer
             saveObjectList = Load(); //load the saveObjectList
             foreach (SaveObject save in saveObjectList.saveObjects)
             {
-                if (save.itemData.name == name)
+                if (save.name == name)
                 {
                     saveObjectList.saveObjects.Remove(save);
                     UpdateSaveFile(saveObjectList.saveObjects);
+                    Debug.Log("Item Removed");
                     break;
                 }
             }
@@ -136,5 +163,28 @@ public class ItemContainer
             //if return new save object 
             return new SaveObjectList();
         }
+    }
+    public static Dictionary<ItemData, GameObject> GetItemDatas()
+    {
+        Dictionary<ItemData, GameObject> itemDatas = new Dictionary<ItemData, GameObject>();
+        SaveObjectList saveObjectList = Load();
+        foreach (SaveObject item in saveObjectList.saveObjects)
+        {
+            Texture2D itemTexture = Resources.Load<Texture2D>(item.imageLocation);
+            Sprite itemSprite = Sprite.Create(Resources.Load<Texture2D>(item.imageLocation), new Rect(0, 0, itemTexture.width, itemTexture.height), new Vector2(0.5f, 0.5f));
+
+            ItemData itemData = new ItemData(
+                itemSprite,
+                item.name,
+                item.description,
+                item.cost,
+                item.type);
+
+            GameObject prefab = Resources.Load<GameObject>(item.prefabLocation);
+
+            itemDatas.Add(itemData, prefab);
+        }
+
+        return itemDatas;
     }
 }

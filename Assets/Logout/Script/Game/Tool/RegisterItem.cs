@@ -22,12 +22,10 @@ public class RegisterItem : EditorWindow
 
     private void OnGUI()
     {
-        image = (Sprite)EditorGUILayout.ObjectField("Image", image, typeof(Sprite), false);
         name = EditorGUILayout.TextField("Name", name);
         description = EditorGUILayout.TextField("Description", description);
         cost = EditorGUILayout.FloatField("Cost", cost);
         type = (ItemType)EditorGUILayout.EnumPopup("Type", type);
-        prefab = (GameObject)EditorGUILayout.ObjectField("Prefab", prefab, typeof(GameObject), false);
 
         if (GUILayout.Button("Register"))
         {

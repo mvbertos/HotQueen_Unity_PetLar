@@ -66,16 +66,15 @@ public class StoreManager : MonoBehaviour
         //add a listener to the button
         //set the button data
         //add the button to the product list
-        ItemContainer.SaveObjectList saveObjectList = ItemContainer.Load();
-        Debug.Log(saveObjectList.saveObjects.Count);
-
-        foreach (ItemContainer.SaveObject save in saveObjectList.saveObjects)
+        Dictionary<ItemData,GameObject> productDictionary = ItemContainer.GetItemDatas();
+        Debug.Log(productDictionary.Keys.Count);
+        foreach (ItemData item in productDictionary.Keys)
         {
-            if (save.itemData.type == itemType)
+            if (item.type == itemType)
             {
                 ProductButton button = Instantiate(productButton, productParent);
-                button.SetProduct(save.itemData);
-                button.GetComponent<Button>().onClick.AddListener(() => MoreAbout(save.itemData, save.prefab));
+                button.SetProduct(item);
+                button.GetComponent<Button>().onClick.AddListener(() => MoreAbout(item, productDictionary[item]));
             }
         }
     }
