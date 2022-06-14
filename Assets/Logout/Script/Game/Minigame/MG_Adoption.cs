@@ -6,15 +6,16 @@ using UnityEngine.UI;
 public class MG_Adoption : MonoBehaviour
 {
     [SerializeField] private Button QuitButton;
-    [SerializeField] private EntityData[] newData = new EntityData[2];
     [SerializeField] private Perfil perfil_pet;
     [SerializeField] private Perfil perfil_human;
+    [SerializeField] private Canvas background;
     private List<Pet> petList = new List<Pet>();
     private Pet pet;
 
     private void Start()
     {
         QuitButton.onClick.AddListener(delegate { Destroy(this.gameObject); });
+        background.worldCamera = Camera.main;
     }
 
 
@@ -22,6 +23,14 @@ public class MG_Adoption : MonoBehaviour
     {
         //SETUP MINIGAME
         InitMinigame();
+        GameObject mainui = GameObject.FindObjectOfType<StatusBar>().gameObject;
+        mainui.SetActive(false);
+    }
+
+    private void OnDisable()
+    {
+        GameObject mainui = GameObject.FindObjectOfType<StatusBar>().gameObject;
+        mainui.SetActive(true);
     }
 
     /// <summary>
@@ -44,7 +53,7 @@ public class MG_Adoption : MonoBehaviour
             EntityData new_data = pet.GetData();
 
             //apply into petfil_pet
-            perfil_human.current_data = newData[0];
+            perfil_human.current_data = new EntityData("Robson", null, EntityData.Personalities.Playfull);
             perfil_pet.current_data = new_data;
 
             perfil_pet.gameObject.SetActive(true);
@@ -72,10 +81,10 @@ public class MG_Adoption : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    private void OnDisable()
-    {
+    // private void OnDisable()
+    // {
 
-        perfil_pet.gameObject.SetActive(false);
-        perfil_human.gameObject.SetActive(false);
-    }
+    //     perfil_pet.gameObject.SetActive(false);
+    //     perfil_human.gameObject.SetActive(false);
+    // }
 }

@@ -111,7 +111,7 @@ public class PlayerMouse : MonoBehaviour
                 }
             }
         });
-        
+
     }
 
     private void Interact(GameObject gameObject)
@@ -123,6 +123,10 @@ public class PlayerMouse : MonoBehaviour
         else if (gameObject.TryGetComponent<Bathroom>(out Bathroom bathroom))
         {
             bathroom.Clean();
+        }
+        else if (gameObject.TryGetComponent<Stamp>(out Stamp stamp))
+        {
+            stamp.Use();
         }
     }
 
