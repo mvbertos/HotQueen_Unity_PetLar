@@ -9,7 +9,7 @@ public class Pet : MonoBehaviour
     //pet information
     [SerializeField] private PetData data;
     [SerializeField] private InformationDisplayer informationDisplayer;
-    
+
 
     //pet status
     //mood will be reduced, when pet is nearby bad things like empty food pot, dirty corner and else.
@@ -19,12 +19,12 @@ public class Pet : MonoBehaviour
     //petstate
     public PetState state;
 
-
     private void Start()
     {
         informationDisplayer.UpdateInformation(data.Name, 100);
         state = PetState.Idle;
         InitStatus();
+        GameManager.petInstances.Add(this);
     }
 
     //pet 

@@ -5,9 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class MainScreen : MonoBehaviour
 {
-
-    public void LoadGame()
+    public void StartGame()
     {
-        SceneManager.LoadScene("SampleScene");
+        GameManager.SwitchScene("GameScene", 1);
     }
 }

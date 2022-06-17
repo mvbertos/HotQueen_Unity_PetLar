@@ -104,4 +104,8 @@ public class Adoption : Event
         EventDescription = "Doe um bixinho resgatado!";
         TimeRange = new Vector2(1, 2);
     }
+    public override void ConfirmEvent()
+    {
+        GameManager.SwitchScene("MG_AdoptionScene");
+    }
 }

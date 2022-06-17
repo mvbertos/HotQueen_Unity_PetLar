@@ -33,7 +33,7 @@ public class TrellowInterface : MonoBehaviour
     [SerializeField] private Transform todo;
     [SerializeField] private Transform doing;
     [SerializeField] private Transform done;
-    [SerializeField] private MG_Adoption mg_AdoptionRef;
+    [SerializeField] private AdoptionDocument adoptionDocument;
     private Action OnUpdate;
 
     private void Start()
@@ -114,7 +114,6 @@ public class TrellowInterface : MonoBehaviour
                 }
                 if (task.Event is Adoption)
                 {
-                    Instantiate(mg_AdoptionRef, new Vector3(), Quaternion.identity);
                     CompletedTask(ref task.RefTime, task.Event.TimeRange.y, task, task.TaskButtonInstance.taskSlider, false);
                 }
                 else

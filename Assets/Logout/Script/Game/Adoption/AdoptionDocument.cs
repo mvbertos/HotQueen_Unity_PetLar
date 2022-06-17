@@ -3,19 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class MG_Adoption : MonoBehaviour
+using TMPro;
+public class AdoptionDocument : MonoBehaviour
 {
     [SerializeField] private Button QuitButton;
     [SerializeField] private Perfil perfil_pet;
     [SerializeField] private Perfil perfil_human;
     [SerializeField] private Canvas background;
-    private List<Pet> petList = new List<Pet>();
+    [SerializeField] private TMP_Text description;
     private Pet pet;
+    [HideInInspector] public bool Approved;
 
     private void Start()
     {
         QuitButton.onClick.AddListener(delegate { Destroy(this.gameObject); });
-        background.worldCamera = Camera.main;
     }
 
 
@@ -23,14 +24,11 @@ public class MG_Adoption : MonoBehaviour
     {
         //SETUP MINIGAME
         InitMinigame();
-        GameObject mainui = GameObject.FindObjectOfType<StatusBar>().gameObject;
-        mainui.SetActive(false);
     }
 
     private void OnDisable()
     {
-        GameObject mainui = GameObject.FindObjectOfType<StatusBar>().gameObject;
-        mainui.SetActive(true);
+        GameManager.SwitchToLastScene();
     }
 
     /// <summary>
@@ -39,7 +37,7 @@ public class MG_Adoption : MonoBehaviour
     private void InitMinigame()
     {
         //create a list of pets found in the scene
-        petList = FindObjectsOfType<Pet>().ToList();
+        List<Pet> petList = GameManager.petInstances;
 
         if (petList.Count > 0)
         {
@@ -58,6 +56,9 @@ public class MG_Adoption : MonoBehaviour
 
             perfil_pet.gameObject.SetActive(true);
             perfil_human.gameObject.SetActive(true);
+
+            //set description
+            description.text = description.text.Replace("@pet_name", new_data.Name);
         }
 
     }
@@ -80,11 +81,4 @@ public class MG_Adoption : MonoBehaviour
     {
         Destroy(this.gameObject);
     }
-
-    // private void OnDisable()
-    // {
-
-    //     perfil_pet.gameObject.SetActive(false);
-    //     perfil_human.gameObject.SetActive(false);
-    // }
 }

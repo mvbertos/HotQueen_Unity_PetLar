@@ -73,7 +73,13 @@ public class PlayerMouse : MonoBehaviour
 
     private void OnMouseRightClickCallback()
     {
-        Debug.Log("Nothing implemented");
+        Ray mousePosition = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        playerInputs.Interact(mousePosition, (hit) =>
+        {
+            //if pot
+            Interact(hit.collider.attachedRigidbody.gameObject);
+        }
+        );
     }
 
     private void OnMouseLeftUpCallback()
@@ -91,27 +97,12 @@ public class PlayerMouse : MonoBehaviour
         Ray mousePosition = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         playerInputs.Interact(mousePosition, (hit) =>
         {
-            if (hit)
+            if (hit.rigidbody)
             {
-                switch (mouseRole)
-                {
-                    case MouseRole.Drag:
-                        if (hit.rigidbody)
-                        {
-                            SetMouseState(MouseState.Dragging);
-                            playerDragObject.GrabObject(hit.rigidbody);
-                        }
-                        break;
-                    case MouseRole.Trigger:
-                        //if pot
-                        Interact(hit.collider.attachedRigidbody.gameObject);
-                        break;
-                    default:
-                        break;
-                }
+                SetMouseState(MouseState.Dragging);
+                playerDragObject.GrabObject(hit.rigidbody);
             }
         });
-
     }
 
     private void Interact(GameObject gameObject)

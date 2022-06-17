@@ -20,7 +20,7 @@ public class PlayerDragObject : MonoBehaviour
     {
         if (dragging)
         {
-            DragObjectToTarget(rigidbodyDragged, (Vector2)Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()));
+            DragObjectToTarget(rigidbodyDragged, Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()));
         }
     }
 
@@ -43,7 +43,7 @@ public class PlayerDragObject : MonoBehaviour
             //body type
             defaultRigidBody.bodyType = rigidbodyDragged.bodyType;
             rigidbodyDragged.bodyType = RigidbodyType2D.Dynamic;
-            
+
             //drag
             defaultRigidBody.drag = rigidbodyDragged.drag;
             rigidbodyDragged.drag = 0;
