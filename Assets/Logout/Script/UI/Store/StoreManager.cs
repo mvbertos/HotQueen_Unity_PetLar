@@ -22,6 +22,7 @@ public class StoreManager : MonoBehaviour
     [SerializeField] private TMP_Text cost;
     //BUY
     [SerializeField] private Button buyButton;
+    [SerializeField] private GameObject moreAbout;
 
     private void Start()
     {
@@ -66,7 +67,7 @@ public class StoreManager : MonoBehaviour
         //add a listener to the button
         //set the button data
         //add the button to the product list
-        Dictionary<ItemData,GameObject> productDictionary = ItemContainer.GetItemDatas();
+        Dictionary<ItemData, GameObject> productDictionary = ItemContainer.GetItemDatas();
         Debug.Log(productDictionary.Keys.Count);
         foreach (ItemData item in productDictionary.Keys)
         {
@@ -81,15 +82,26 @@ public class StoreManager : MonoBehaviour
 
     private void MoreAbout(ItemData itemData, GameObject prefab)
     {
-        //open a screen with the product data
-        //add a button to buy the product
-        //add a listener to the button
-        //add the product to the player inventory
-        //remove amount of money from the player
-        title.text = itemData.name;
-        description.text = itemData.description;
-        cost.text = itemData.cost.ToString();
-        buyButton.onClick.AddListener(() => Buy(prefab, itemData.cost));
+        moreAbout.SetActive(title.text != itemData.name);
+        if (moreAbout.activeInHierarchy)
+        {
+            //open a screen with the product data
+            //add a button to buy the product
+            //add a listener to the button
+            //add the product to the player inventory
+            //remove amount of money from the player
+            title.text = itemData.name;
+            description.text = itemData.description;
+            cost.text = itemData.cost.ToString();
+            buyButton.onClick.AddListener(() => Buy(prefab, itemData.cost));
+        }
+        else
+        {
+            title.text = "";
+            description.text = "";
+            cost.text = "";
+            buyButton.onClick.AddListener(() => { });
+        }
     }
 
     private void Buy(GameObject prefab, float cost)

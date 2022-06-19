@@ -11,7 +11,7 @@ public class AdoptionDocument : MonoBehaviour
     [SerializeField] private Perfil perfil_human;
     [SerializeField] private Canvas background;
     [SerializeField] private TMP_Text description;
-    private Pet pet;
+    private PetData pet;
     [HideInInspector] public bool Approved;
 
     private void Start()
@@ -37,28 +37,21 @@ public class AdoptionDocument : MonoBehaviour
     private void InitMinigame()
     {
         //create a list of pets found in the scene
-        List<Pet> petList = GameManager.petInstances;
+        ONG ong = GameObject.FindObjectOfType<ONG>();
+        List<PetData> petList = ong.PetDatas;
 
         if (petList.Count > 0)
         {
             //get a random pet in the list
-            Pet[] petarray = petList.ToArray();
+            PetData[] petarray = petList.ToArray();
             pet = petarray[Random.Range(0, petarray.Length)];
 
-
-            //put it in adoption
-            //create new data to the first pet in the list
-            EntityData new_data = pet.GetData();
-
             //apply into petfil_pet
-            perfil_human.current_data = new EntityData("Robson", null, EntityData.Personalities.Playfull);
-            perfil_pet.current_data = new_data;
-
-            perfil_pet.gameObject.SetActive(true);
-            perfil_human.gameObject.SetActive(true);
+            perfil_human.UpdateInfo(new EntityData("Robson", null, EntityData.Personalities.Playfull));
+            perfil_pet.UpdateInfo(pet);
 
             //set description
-            description.text = description.text.Replace("@pet_name", new_data.Name);
+            description.text = description.text.Replace("@pet_name", pet.Name);
         }
 
     }
@@ -70,8 +63,8 @@ public class AdoptionDocument : MonoBehaviour
     {
         //get pet to bet adopted
         //remove it from world
-        Destroy(pet.gameObject);
-        Destroy(this.gameObject);
+        ONG ong = GameObject.FindObjectOfType<ONG>();
+        ong.RemovePet(pet);
     }
 
     /// <summary>
@@ -79,6 +72,6 @@ public class AdoptionDocument : MonoBehaviour
     /// </summary>
     public void Reject()
     {
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
     }
 }

@@ -17,35 +17,35 @@ public class EventInterfaceManager : MonoBehaviour
 
     [SerializeField] private Button acceptButton;
     [SerializeField] private Button declineButton;
+    public bool IsActive { get { return event_interface.activeInHierarchy; } }
 
     public void Enable(String text, Sprite image, Action OnAccept = null, Action OnDecline = null)
     {
         event_description.text = text;
         event_image.sprite = image;
 
-        //Register actions on OnEventDeclined
-        OnEventDeclined += () =>
-        {
-            OnDecline?.Invoke();
-            Disable();
-        };
+        acceptButton.interactable = true;
+        declineButton.interactable = true;
 
-        //Register actions on OnEventAccepted
-        OnEventAccepted += () =>
+        acceptButton.onClick.AddListener(delegate
         {
             OnAccept?.Invoke();
             Disable();
-        };
+        });
 
-        acceptButton.onClick.AddListener(delegate { OnEventAccepted(); });
-        declineButton.onClick.AddListener(delegate { OnEventDeclined(); });
+        declineButton.onClick.AddListener(delegate
+        {
+
+            OnDecline?.Invoke();
+            Disable();
+        });
 
         event_interface.SetActive(true);
     }
     public void Disable()
     {
-        OnEventAccepted = null;
-        OnEventDeclined = null;
+        declineButton.onClick.RemoveAllListeners();
+        acceptButton.onClick.RemoveAllListeners();
         event_interface.SetActive(false);
     }
 }

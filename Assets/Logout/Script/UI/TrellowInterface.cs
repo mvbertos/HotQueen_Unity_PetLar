@@ -33,7 +33,6 @@ public class TrellowInterface : MonoBehaviour
     [SerializeField] private Transform todo;
     [SerializeField] private Transform doing;
     [SerializeField] private Transform done;
-    [SerializeField] private AdoptionDocument adoptionDocument;
     private Action OnUpdate;
 
     private void Start()
@@ -41,6 +40,7 @@ public class TrellowInterface : MonoBehaviour
         Donation donation = new Donation(10);
         Adoption adoption = new Adoption();
         AddNewTask(new Event[] { donation, adoption });
+        StartCoroutine(UpdateTasks());
     }
 
     public void Hide()
@@ -98,27 +98,33 @@ public class TrellowInterface : MonoBehaviour
 
     private void Update()
     {
-        //for each task
-        //register action to update method
-        foreach (TrellowTask task in tasksToExecute)
+
+    }
+
+    private IEnumerator UpdateTasks()
+    {
+        while (true)
         {
-            if (task.TaskButtonInstance.transform.parent == doing)
+            yield return new WaitForSeconds(0.5f);
+            //for each task
+            //register action to update method
+            for (int i = 0; i < tasksToExecute.Count; i++)
             {
-                CompletingTask(ref task.RefTime, task.Event.TimeRange.y, task, task.TaskButtonInstance.taskSlider);
-            }
-            if (task.TaskButtonInstance.transform.parent == done)
-            {
-                if (task.Event is Donation)
+                TrellowTask task = tasksToExecute[i];
+                if (task.TaskButtonInstance.transform.parent == doing)
                 {
+                    CompletingTask(ref task.RefTime, task.Event.TimeRange.y, task, task.TaskButtonInstance.taskSlider);
+                }
+                if (task.TaskButtonInstance.transform.parent == done)
+                {
+                    bool itLoops = false;
+
+                    if (task.Event is Donation)
+                    {
+                        itLoops = true;
+                    }
+
                     CompletedTask(ref task.RefTime, task.Event.TimeRange.y, task, task.TaskButtonInstance.taskSlider, true);
-                }
-                if (task.Event is Adoption)
-                {
-                    CompletedTask(ref task.RefTime, task.Event.TimeRange.y, task, task.TaskButtonInstance.taskSlider, false);
-                }
-                else
-                {
-                    CompletedTask(ref task.RefTime, task.Event.TimeRange.y, task, task.TaskButtonInstance.taskSlider, false);
                 }
             }
         }
@@ -132,7 +138,6 @@ public class TrellowInterface : MonoBehaviour
         {
             if (!taskButtonInstances.ContainsKey(task))
             {
-
                 TaskButton taskButton = Instantiate<TaskButton>(buttonRef);
                 taskButton.transform.parent = todo;
                 taskButtonInstances.Add(task, taskButton);
@@ -158,7 +163,7 @@ public class TrellowInterface : MonoBehaviour
     private void CompletingTask(ref float currentTime, float end, TrellowTask task, Slider slider)
     {
         //calculate bar
-        currentTime += Time.deltaTime;
+        currentTime += 0.25f;
         float value = currentTime / (end);
         value = Mathf.Clamp(value, 0, 1);
 
@@ -177,10 +182,9 @@ public class TrellowInterface : MonoBehaviour
         if (loop)
         {
             //calculate bar
-            currentTime -= Time.deltaTime;
-            float value = currentTime / (end);
+            currentTime -= 0.25f;
+            float value = currentTime / end;
             value = Mathf.Clamp(value, 0, 1);
-
             //update slider
             slider.value = value;
             task.Event.ConfirmEvent();
@@ -195,5 +199,6 @@ public class TrellowInterface : MonoBehaviour
             task.Event.ConfirmEvent();
             RemoveTask(task);
         }
+
     }
 }

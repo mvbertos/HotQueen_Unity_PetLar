@@ -28,7 +28,6 @@ public class Pet : MonoBehaviour
         informationDisplayer.UpdateInformation(data.Name, 100);
         state = PetState.Idle;
         InitStatus();
-        GameManager.petInstances.Add(this);
     }
 
     //pet 
@@ -40,6 +39,10 @@ public class Pet : MonoBehaviour
     public PetData GetData()
     {
         return data;
+    }
+    public void SetData(PetData petData)
+    {
+        data = petData;
     }
 
     public void SetStatus(PetStatus status)

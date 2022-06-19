@@ -30,7 +30,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1959693303336507130}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -153,9 +153,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseCursor:
-    Pressing: {fileID: 2800000, guid: 024891e570a008e4b90573ff4a53130a, type: 3}
-    Hovering: {fileID: 2800000, guid: 1b05bd7541fae084da31431c2d2aeae4, type: 3}
-    Idle: {fileID: 2800000, guid: 220b6627b18a91e4fbe548c0e41b7a9e, type: 3}
+    Pressing: {fileID: 2800000, guid: ac2db68703a410a4d864b498cc959ed9, type: 3}
+    Hovering: {fileID: 2800000, guid: 220b6627b18a91e4fbe548c0e41b7a9e, type: 3}
+    Idle: {fileID: 2800000, guid: 31c73c499934a6347bf6fc1b4ae68200, type: 3}
     Grabbing: {fileID: 2800000, guid: 15188121e629e174a94a17c2d8010114, type: 3}
   mouseRole: 0
   mouseState: 0

@@ -34,16 +34,19 @@ public class Rescue : Event
     private Pet randomPet = null;
     public Rescue()
     {
-        Pet[] petArray = GameManager.instance.PetReferences.ToArray();
-        randomPet = petArray[Random.Range(0, GameManager.petInstances.Count - 1)];
+        //get ong component in scene
+        //get pets in list pets
+        //get random pet from list pets
+
+        randomPet = GameManager.instance.PetReferences[Random.Range(0, GameManager.instance.PetReferences.Length)];
         //Set event_sprite as it´s appearance
         EventSprite = randomPet.GetData().Picture;
         //set name
         EventName = "Pet Rescue";
         //Set Description
-        EventDescription = "A pet is getting cold out side your door, you wish to give him a temporary home?";
+        EventDescription = "Um bixinho está sentindo muito frio e fome do lado de fora de sua ong, deseja socorrer ele?";
         //Set Time Range
-        TimeRange = new Vector2(25, 50);
+        TimeRange = new Vector2(30, 50);
     }
 
     public override void ConfirmEvent()

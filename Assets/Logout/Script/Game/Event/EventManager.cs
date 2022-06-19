@@ -40,11 +40,7 @@ public class EventManager : MonoBehaviour
         int rand_time = Random.Range((int)rand_event.TimeRange.x, (int)rand_event.TimeRange.y);
 
         //create new timer
-        TimerEvent.Create(() =>
-        {
-            eventInterface.Enable(rand_event.EventDescription, rand_event.EventSprite, () => { rand_event.ConfirmEvent(); RemoveEvent(rand_event); }, () => { rand_event.DeclineEvent(); RemoveEvent(rand_event); });
-        }, rand_time);
-
+        StartCoroutine(WaitToEnable(rand_event, rand_time));
     }
 
     private void RemoveEvent(Event rand_event)
@@ -53,6 +49,24 @@ public class EventManager : MonoBehaviour
         if (events.Count == 0)
         {
             InitializeEventList();
+        }
+    }
+    private IEnumerator WaitToEnable(Event rand_event, float rand_time)
+    {
+        while (true)
+        {
+            if (!eventInterface.IsActive)
+            {
+
+                TimerEvent.Create(() =>
+                {
+                    Debug.Log("Create");
+                    eventInterface.Enable(rand_event.EventDescription, rand_event.EventSprite, () => { rand_event.ConfirmEvent(); RemoveEvent(rand_event); }, () => { rand_event.DeclineEvent(); RemoveEvent(rand_event); });
+
+                }, rand_time);
+                break;
+            }
+            yield return new WaitForSeconds(0.1f);
         }
     }
 }

@@ -54,21 +54,25 @@ public class PlayerMouse : MonoBehaviour
     private void HoveringTrigger()
     {
         //check if mouse is hovering over an object
-        Ray mouseRay = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-        if (Physics2D.GetRayIntersection(mouseRay, 10, playerInputs.LayerInteraction))
+        if (GameObject.FindObjectsOfType<Camera>().Length > 0)
         {
-            if (mouseState == MouseState.Idle)
+            Ray mouseRay = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+            if (Physics2D.GetRayIntersection(mouseRay, 10, playerInputs.LayerInteraction))
             {
-                SetMouseState(MouseState.Hovering);
+                if (mouseState == MouseState.Idle)
+                {
+                    SetMouseState(MouseState.Hovering);
+                }
+            }
+            else
+            {
+                if (mouseState == MouseState.Hovering)
+                {
+                    SetMouseState(MouseState.Idle);
+                }
             }
         }
-        else
-        {
-            if (mouseState == MouseState.Hovering)
-            {
-                SetMouseState(MouseState.Idle);
-            }
-        }
+
     }
 
     private void OnMouseRightClickCallback()

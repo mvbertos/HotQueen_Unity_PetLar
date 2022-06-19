@@ -96,13 +96,16 @@ public class PlayerInputs : MonoBehaviour
     private void OnShortcutsPressedCallback(InputAction.CallbackContext obj)
     {
         var value = obj.ReadValue<float>();
+        SaveSystem saveSystem = new SaveSystem();
         switch (value)
         {
             case 1:
                 OnFirstShortcut?.Invoke();
+                saveSystem.SaveONG(GameObject.FindObjectOfType<ONG>());
                 break;
             case 2:
                 OnSecondShortcut?.Invoke();
+                saveSystem.LoadONG();
                 break;
             case 3:
                 OnThirdShortcut?.Invoke();
@@ -144,7 +147,8 @@ public class PlayerInputs : MonoBehaviour
     {
         //raycast to interact with objects
         RaycastHit2D hit = Physics2D.GetRayIntersection(ray, 100, layerInteraction);
-        if(hit){
+        if (hit)
+        {
             OnInteract?.Invoke(hit);
         }
     }

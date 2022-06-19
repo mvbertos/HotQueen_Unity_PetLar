@@ -12,8 +12,6 @@ public class PlayerShortcuts : MonoBehaviour
     [SerializeField] private PlayerMouse playerMouse;
 
     //SCREEN REFERENCES
-    [SerializeField] private TrellowInterface trellowInterface;
-    [SerializeField] private StoreManager storeInterface;
 
     private void Start()
     {
@@ -25,7 +23,8 @@ public class PlayerShortcuts : MonoBehaviour
 
     private void EnableStoreScreen()
     {
-        storeInterface.Show();
+        StoreManager storeManager = FindObjectOfType<StoreManager>();
+        storeManager.Show();
     }
 
     private void ChangeToolToTrigger()
@@ -40,6 +39,7 @@ public class PlayerShortcuts : MonoBehaviour
 
     private void EnableMinigameScreen()
     {
+        TrellowInterface trellowInterface = FindObjectOfType<TrellowInterface>();
         trellowInterface.Show();
     }
 }

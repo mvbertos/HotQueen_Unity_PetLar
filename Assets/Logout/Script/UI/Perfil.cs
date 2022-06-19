@@ -14,17 +14,12 @@ public class Perfil : MonoBehaviour
 
     [HideInInspector] public EntityData current_data;
 
-    private void OnEnable()
+    public void UpdateInfo(EntityData data)
     {
+        current_data = data;
         text_name.text = current_data.Name;
         image_userImage.sprite = current_data.Picture;
         text_personality.text = current_data.Personality.ToString();
-    }
-    private void OnDisable()
-    {
-        text_name.text = "";
-        image_userImage.sprite = null;
-        text_personality.text = "";
     }
 }
 [System.Serializable]
@@ -54,7 +49,7 @@ public class EntityData
 public class PetData : EntityData
 {
     public Species specie;
-    public PetData(string name, Sprite picture, Personalities personality,Species species) : base(name, picture, personality)
+    public PetData(string name, Sprite picture, Personalities personality, Species species) : base(name, picture, personality)
     {
         this.specie = species;
     }

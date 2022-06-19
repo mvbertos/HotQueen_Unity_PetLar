@@ -55,6 +55,16 @@ public class TimerEvent
         }
     }
 
+    public static void StopAll()
+    {
+        InitIfNeeded();
+        for (var i = 0; i < ActiveTimerEvent.Count; i++)
+        {
+            ActiveTimerEvent[i].DestroySelf();
+            i--;
+        }
+    }
+
     private Action action;
     private float timer;
     private string timerName;
