@@ -79,6 +79,7 @@ MonoBehaviour:
   StampPrefab: {fileID: 7642305366372297839, guid: 25bfd08785d36d045930c17309096498,
     type: 3}
   StampPoint: {fileID: 1222379055}
+  approve: 1
 --- !u!50 &2139329526
 Rigidbody2D:
   serializedVersion: 4

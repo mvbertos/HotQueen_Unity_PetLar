@@ -65,6 +65,7 @@ public class AdoptionDocument : MonoBehaviour
         //remove it from world
         ONG ong = GameObject.FindObjectOfType<ONG>();
         ong.RemovePet(pet);
+        GameManager.SwitchToLastScene();
     }
 
     /// <summary>
@@ -72,6 +73,6 @@ public class AdoptionDocument : MonoBehaviour
     /// </summary>
     public void Reject()
     {
-        //Destroy(this.gameObject);
+        GameManager.SwitchToLastScene();
     }
 }

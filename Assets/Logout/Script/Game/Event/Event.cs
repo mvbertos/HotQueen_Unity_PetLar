@@ -52,11 +52,12 @@ public class Rescue : Event
     public override void ConfirmEvent()
     {
         GameManager.AddNewPetToWorld(randomPet);
+
     }
 
     public override void DeclineEvent()
     {
-        //nothing for the moment
+
     }
 }
 /// <summary>

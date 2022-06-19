@@ -38,8 +38,7 @@ public class TrellowInterface : MonoBehaviour
     private void Start()
     {
         Donation donation = new Donation(10);
-        Adoption adoption = new Adoption();
-        AddNewTask(new Event[] { donation, adoption });
+        AddNewTask(new Event[] { donation });
         StartCoroutine(UpdateTasks());
     }
 

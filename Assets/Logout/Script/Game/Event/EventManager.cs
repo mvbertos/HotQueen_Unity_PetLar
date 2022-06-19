@@ -60,13 +60,17 @@ public class EventManager : MonoBehaviour
 
                 TimerEvent.Create(() =>
                 {
-                    Debug.Log("Create");
                     eventInterface.Enable(rand_event.EventDescription, rand_event.EventSprite, () => { rand_event.ConfirmEvent(); RemoveEvent(rand_event); }, () => { rand_event.DeclineEvent(); RemoveEvent(rand_event); });
-
                 }, rand_time);
                 break;
             }
             yield return new WaitForSeconds(0.1f);
         }
+    }
+
+    public void ForceAdoptionMinigame()
+    {
+        Adoption adoption = new Adoption();
+        adoption.ConfirmEvent();
     }
 }
