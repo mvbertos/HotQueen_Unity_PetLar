@@ -9,6 +9,10 @@ public class Pet : MonoBehaviour
     //pet information
     [SerializeField] private PetData data;
     [SerializeField] private InformationDisplayer informationDisplayer;
+    [SerializeField] private AIMovimentation movement;
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    public SpriteRenderer SpriteRenderer { get { return spriteRenderer; } }
+    [SerializeField] private Collider2D[] colliders;
 
 
     //pet status
@@ -42,6 +46,8 @@ public class Pet : MonoBehaviour
     {
         this.status = new PetStatus(status.Mood, status.Fun, status.Hunger, status.Sleep, status.Bathroom);
     }
+
+
     public void AddStatus(float mood, float fun, float hunger, float sleep, float bathroom)
     {
         PetStatus newStatus = new PetStatus(mood, fun, hunger, sleep, bathroom);
@@ -53,6 +59,35 @@ public class Pet : MonoBehaviour
         this.status.Bathroom += bathroom;
     }
 
+    public void EnableAI()
+    {
+        movement.enabled = true;
+    }
+
+    public void DisableAI()
+    {
+        movement.enabled = false;
+    }
+
+    public void DisableColliders()
+    {
+        //get all colliders in child and disable them
+        foreach (Collider2D collider in colliders)
+        {
+            collider.enabled = false;
+        }
+    }
+
+    public void EnableColliders()
+    {
+        //get all colliders in child and disable them
+        foreach (Collider2D collider in colliders)
+        {
+            collider.enabled = true;
+        }
+    }
+
+
     public void GetStatus(out PetStatus status, out PetStatus maxStatus)
     {
         status = this.status;
@@ -63,7 +98,7 @@ public class Pet : MonoBehaviour
     private void InitStatus()
     {
         //Health and Stuff
-        status = new PetStatus(100, 100, 100, 100, 100);
+        status = new PetStatus(100, 100, 100, 25, 100);
         maxStatus = new PetStatus(100, 100, 100, 100, 100);
     }
 }

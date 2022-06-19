@@ -34,7 +34,8 @@ public class Rescue : Event
     private Pet randomPet = null;
     public Rescue()
     {
-        randomPet = GameManager.petArray.ToArray()[Random.Range(0, GameManager.petArray.Length - 1)];
+        Pet[] petArray = GameManager.instance.PetReferences.ToArray();
+        randomPet = petArray[Random.Range(0, GameManager.petInstances.Count - 1)];
         //Set event_sprite as it´s appearance
         EventSprite = randomPet.GetData().Picture;
         //set name
@@ -42,7 +43,7 @@ public class Rescue : Event
         //Set Description
         EventDescription = "A pet is getting cold out side your door, you wish to give him a temporary home?";
         //Set Time Range
-        TimeRange = new Vector2(1, 2);
+        TimeRange = new Vector2(25, 50);
     }
 
     public override void ConfirmEvent()

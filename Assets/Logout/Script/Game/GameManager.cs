@@ -15,8 +15,20 @@ public class GameManager : MonoBehaviour
     //PET THINGS
     public static List<Pet> petInstances = new List<Pet>(); //register of all pets in world currently
     [SerializeField] private Pet[] petReferences;//filled with prefabs
-    public static Pet[] petArray { private set; get; }// same as petReferences but static
+    public Pet[] PetReferences { get { return petReferences; } }
     private static readonly String[] petNames = { "Alberto", "Samanta", "Poly", "Nino", "Amaterasu" }; //list of names to be used
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Start()
     {

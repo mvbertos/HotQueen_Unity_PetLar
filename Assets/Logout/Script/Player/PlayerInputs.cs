@@ -144,7 +144,8 @@ public class PlayerInputs : MonoBehaviour
     {
         //raycast to interact with objects
         RaycastHit2D hit = Physics2D.GetRayIntersection(ray, 100, layerInteraction);
-
-        OnInteract?.Invoke(hit);
+        if(hit){
+            OnInteract?.Invoke(hit);
+        }
     }
 }

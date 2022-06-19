@@ -7,9 +7,7 @@ public class EventManager : MonoBehaviour
 {
 
     List<Event> events = new List<Event>();
-    List<Event> eventsToExecute = new List<Event>();
     public EventInterfaceManager eventInterface;
-    public Pet[] pet;
 
     private void Start()
     {
@@ -44,10 +42,17 @@ public class EventManager : MonoBehaviour
         //create new timer
         TimerEvent.Create(() =>
         {
-            eventInterface.Enable(rand_event.EventDescription, rand_event.EventSprite, rand_event.ConfirmEvent, rand_event.DeclineEvent);
-        }, 1);
+            eventInterface.Enable(rand_event.EventDescription, rand_event.EventSprite, () => { rand_event.ConfirmEvent(); RemoveEvent(rand_event); }, () => { rand_event.DeclineEvent(); RemoveEvent(rand_event); });
+        }, rand_time);
 
-        // if there is no more events in the list
-        // initialize list again
+    }
+
+    private void RemoveEvent(Event rand_event)
+    {
+        events.Remove(rand_event);
+        if (events.Count == 0)
+        {
+            InitializeEventList();
+        }
     }
 }

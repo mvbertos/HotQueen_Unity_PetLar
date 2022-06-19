@@ -262,11 +262,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-    Name: 
-    Picture: {fileID: 0}
+    Name: Nermal
+    Picture: {fileID: 21300000, guid: 8d641d4a1cb29174c969cc88e19658f3, type: 3}
     Personality: 0
     specie: 0
   informationDisplayer: {fileID: 4979509058417092103}
+  movement: {fileID: 6723969952448166849}
+  spriteRenderer: {fileID: 1736755808706651631}
+  colliders: []
   state: 0
 --- !u!114 &6164205618652383934
 MonoBehaviour:

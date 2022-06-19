@@ -72,7 +72,10 @@ public class NeedsHandler : MonoBehaviour
 
         if (target.TryGetComponent<Bed>(out Bed bed))
         {
-            pet.AddStatus(0, 0, 0, bed.Use(), 0);
+            bed.Use(pet);
+            //maximize status
+            pet.GetStatus(out PetStatus status, out PetStatus maxStatus);
+            pet.SetStatus(new PetStatus(status.Mood, status.Fun, status.Hunger, maxStatus.Sleep, status.Bathroom));
         }
     }
     #endregion
@@ -126,11 +129,10 @@ public class NeedsHandler : MonoBehaviour
         {
             //maximize bathroom status of the pet
             pet.GetStatus(out PetStatus petStatus, out PetStatus maxStatus);
-            petStatus.Bathroom = maxStatus.Bathroom;
-            pet.SetStatus(petStatus);
+            pet.SetStatus(new PetStatus(petStatus.Mood, petStatus.Fun, petStatus.Hunger, maxStatus.Sleep, maxStatus.Bathroom));
 
             //use bathroom
-            bathroom.Use();
+            bathroom.Use(this.pet);
         }
     }
 
