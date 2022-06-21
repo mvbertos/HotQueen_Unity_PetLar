@@ -26,8 +26,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Pet petReference;//filled with prefabs
     [SerializeField] private PetData[] petData;
     public PetData[] PetData { get { return petData; } }
-    private readonly String[] petNames = { "Alberto", "Samanta", "Poly", "Nino", "Amaterasu" }; //list of names to be used
-
+    public readonly String[] petNames = { "Alberto", "Samanta", "Poly", "Nino", "Amaterasu", "Thor", "Loki", "Cacau", "Morena" }; //list of names to be used
+    public readonly String[] humanNames = { "Alberto", "Samanta", "Vanderlei", "Nino", "Francisco", "João", "Ana", "Fabricio" }; //list of pictures to be used
     //Sounds
     [SerializeField] private AudioClip Clip_newCat;
     [SerializeField] private AudioClip Clip_newDog;
@@ -68,6 +68,7 @@ public class GameManager : MonoBehaviour
         //instantiate pet in world
         Pet newpet = Instantiate<Pet>(pet, SceneManager.GetSceneByName("GameScene").GetRootGameObjects()[0].transform);
         newpet.ChangeName(petNames[Random.Range(0, petNames.Length)]);
+        newpet.ChangePersonality((EntityData.Personality)Random.Range(0, Enum.GetNames(typeof(EntityData.Personality)).Length));
 
         //add this to ong pets list
         ONG ong = GameObject.FindObjectOfType<ONG>();
@@ -117,7 +118,7 @@ public class GameManager : MonoBehaviour
         Pet[] pets = GameObject.FindObjectsOfType<Pet>();
         foreach (Pet p in pets)
         {
-            if (p.GetData().Name == pet.Name)
+            if (p.GetData().name == pet.name)
             {
                 Destroy(p);
                 break;

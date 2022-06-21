@@ -40,7 +40,7 @@ public class Rescue : Event
 
         randomPet = GameManager.instance.PetData[Random.Range(0, GameManager.instance.PetData.Length)];
         //Set event_sprite as it´s appearance
-        EventSprite = randomPet.Picture;
+        EventSprite = randomPet.picture;
         //set name
         EventName = "Pet Rescue";
         //Set Description

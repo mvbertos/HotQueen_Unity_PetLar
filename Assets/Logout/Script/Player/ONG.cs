@@ -40,7 +40,7 @@ public class ONG : MonoBehaviour
     {
         foreach (PetData item in PetDatas)
         {
-            if (item.Name == pet.Name)
+            if (item.name == pet.name)
             {
                 petDatas.Remove(item);
                 return;

@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Random = UnityEngine.Random;
+using System;
+
 public class AdoptionDocument : MonoBehaviour
 {
     [SerializeField] private Button QuitButton;
@@ -11,7 +14,9 @@ public class AdoptionDocument : MonoBehaviour
     [SerializeField] private Perfil perfil_human;
     [SerializeField] private Canvas background;
     [SerializeField] private TMP_Text description;
+    [SerializeField] private Sprite human_picture;
     private PetData pet;
+    private EntityData human;
     public PetData Pet
     {
         get
@@ -24,7 +29,7 @@ public class AdoptionDocument : MonoBehaviour
             perfil_pet.UpdateInfo(pet);
         }
     }
-    
+
     [HideInInspector]
     public bool Approved;
 
@@ -55,11 +60,12 @@ public class AdoptionDocument : MonoBehaviour
             pet = petarray[Random.Range(0, petarray.Length)];
 
             //apply into petfil_pet
-            perfil_human.UpdateInfo(new EntityData("Robson", null, EntityData.Personalities.Playfull));
+            EntityData.Personality randomPersonality = (EntityData.Personality)Random.Range(0, Enum.GetNames(typeof(EntityData.Personality)).Length);
+            perfil_human.UpdateInfo(new EntityData(GameManager.instance.humanNames[Random.Range(0, GameManager.instance.humanNames.Length)], human_picture, randomPersonality));
             perfil_pet.UpdateInfo(pet);
 
             //set description
-            description.text = description.text.Replace("@pet_name", pet.Name);
+            description.text = description.text.Replace("@pet_name", pet.name);
         }
 
     }
@@ -69,6 +75,18 @@ public class AdoptionDocument : MonoBehaviour
     /// </summary>
     public void Adopt()
     {
+        //if the personality don´t match 
+        //create new event to show the error
+        // if (pet.personality != human)
+        // {
+        //     EventManager eventManager = FindObjectOfType<EventManager>();
+        //     eventManager.ForceRescueMinigame();
+        // }
+        // else
+        // {
+        //     //if the personality match
+        //     //create new event to show the success
+
         //get pet to bet adopted
         //remove it from world
         ONG ong = GameObject.FindObjectOfType<ONG>();

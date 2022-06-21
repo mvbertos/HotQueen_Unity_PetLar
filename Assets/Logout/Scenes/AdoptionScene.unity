@@ -752,9 +752,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TrellowInterface, Assembly-CSharp
-        m_MethodName: Hide
+      - m_Target: {fileID: 2548344994729762973}
+        m_TargetAssemblyTypeName: AdoptionDocument, Assembly-CSharp
+        m_MethodName: Reject
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1683,6 +1683,12 @@ PrefabInstance:
       propertyPath: background
       value: 
       objectReference: {fileID: 5144478479194973634}
+    - target: {fileID: 2862890314868407582, guid: 311e5115d1145ab47b7c4b85e9903359,
+        type: 3}
+      propertyPath: human_picture
+      value: 
+      objectReference: {fileID: 21300000, guid: a7d0d55e753e50e409ac9b3b2afec4a3,
+        type: 3}
     - target: {fileID: 3682625146550163264, guid: 311e5115d1145ab47b7c4b85e9903359,
         type: 3}
       propertyPath: m_Name
@@ -1750,6 +1756,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 311e5115d1145ab47b7c4b85e9903359, type: 3}
+--- !u!114 &2548344994729762973 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2862890314868407582, guid: 311e5115d1145ab47b7c4b85e9903359,
+    type: 3}
+  m_PrefabInstance: {fileID: 2548344994729762972}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb738e91bc31cae46b27942955f39a92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &2812310566519216889
 RectTransform:
   m_ObjectHideFlags: 0

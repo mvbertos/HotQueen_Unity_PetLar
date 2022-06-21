@@ -26,7 +26,7 @@ public class Pet : MonoBehaviour
 
     private void Start()
     {
-        informationDisplayer.UpdateInformation(data.Name, 100);
+        informationDisplayer.UpdateInformation(data.name, 100);
         state = PetState.Idle;
         InitStatus();
         InitGraphics();
@@ -35,14 +35,18 @@ public class Pet : MonoBehaviour
     private void InitGraphics()
     {
         //set sprite renderer as data picture
-        spriteRenderer.sprite = data.Picture;
+        spriteRenderer.sprite = data.picture;
         animator.SetInteger("Type", (int)data.specie);
     }
 
     //pet 
     public void ChangeName(String newName)
     {
-        data.Name = newName;
+        data.name = newName;
+    }
+    public void ChangePersonality(EntityData.Personality newValue)
+    {
+        data.personality = newValue;
     }
 
     public PetData GetData()
@@ -135,12 +139,6 @@ public class PetStatus
         Sleep = sleep;
         Bathroom = bathroom;
     }
-}
-
-public enum Personality
-{
-    Playfull,
-    Angry,
 }
 
 public enum PetState

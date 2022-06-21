@@ -17,31 +17,35 @@ public class Perfil : MonoBehaviour
     public void UpdateInfo(EntityData data)
     {
         current_data = data;
-        text_name.text = current_data.Name;
-        image_userImage.sprite = current_data.Picture;
-        text_personality.text = current_data.Personality.ToString();
+        text_name.text = current_data.name;
+        image_userImage.sprite = current_data.picture;
+        text_personality.text = current_data.personality.ToString();
     }
 }
 [System.Serializable]
 public class EntityData
 {
 
-    public string Name;
-    public Sprite Picture;
-    public Personalities Personality;
+    public string name;
+    public Sprite picture;
+    public Personality personality;
 
-    public enum Personalities
+    public enum Personality
     {
-        Cute,
-        Mad,
-        Playfull
+        Exagerado,
+        Calmo,
+        Amigável,
+        Tranquilo,
+        Impaciente,
+        Parceiro,
+        Desconfiado,
     }
 
-    public EntityData(string name, Sprite picture, Personalities personality)
+    public EntityData(string name, Sprite picture, Personality personality)
     {
-        Name = name;
-        Picture = picture;
-        Personality = personality;
+        this.name = name;
+        this.picture = picture;
+        this.personality = personality;
     }
 }
 
@@ -50,7 +54,7 @@ public class PetData : EntityData
 {
     public bool isDog = true;
     public Species specie;
-    public PetData(string name, Sprite picture, Personalities personality, Species species,bool isDog) : base(name, picture, personality)
+    public PetData(string name, Sprite picture, Personality personality, Species species,bool isDog) : base(name, picture, personality)
     {
         this.specie = species;
         this.isDog = isDog;
