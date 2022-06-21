@@ -48,10 +48,12 @@ public class EntityData
 [System.Serializable]
 public class PetData : EntityData
 {
+    public bool isDog = true;
     public Species specie;
-    public PetData(string name, Sprite picture, Personalities personality, Species species) : base(name, picture, personality)
+    public PetData(string name, Sprite picture, Personalities personality, Species species,bool isDog) : base(name, picture, personality)
     {
         this.specie = species;
+        this.isDog = isDog;
     }
 }
 

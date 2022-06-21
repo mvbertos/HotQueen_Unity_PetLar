@@ -33,6 +33,8 @@ public class PlayerMouse : MonoBehaviour
     [SerializeField] private MouseState mouseState;
     [SerializeField] private PlayerInputs playerInputs;
     [SerializeField] private PlayerDragObject playerDragObject;
+    [SerializeField] private AudioClip mouseClick;
+    [SerializeField] private AudioClip mouseUp;
 
     private void Start()
     {
@@ -42,8 +44,34 @@ public class PlayerMouse : MonoBehaviour
 
         //register inputs
         playerInputs.OnMouseLeftDown += OnMouseLeftPressedCallback;
+        playerInputs.OnMouseLeftDown += MouseClickSound;
         playerInputs.OnMouseLeftUp += OnMouseLeftUpCallback;
+        playerInputs.OnMouseLeftUp += MouseUpSound;
         playerInputs.OnMouseRightDown += OnMouseRightClickCallback;
+        playerInputs.OnMouseRightDown += MouseClickSound;
+        playerInputs.OnMouseRightUp += MouseUpSound;
+    }
+
+    private void MouseClickSound()
+    {
+        //find object of AudioPlayer
+        //play mouseClick
+        AudioPlayer audioPlayer = FindObjectOfType<AudioPlayer>();
+        if (audioPlayer != null)
+        {
+            audioPlayer.PlayAudio(mouseClick, false);
+        }
+    }
+
+    private void MouseUpSound()
+    {
+        //find object of AudioPlayer
+        //play mouseClick
+        AudioPlayer audioPlayer = FindObjectOfType<AudioPlayer>();
+        if (audioPlayer != null)
+        {
+            audioPlayer.PlayAudio(mouseUp, false);
+        }
     }
 
     private void Update()

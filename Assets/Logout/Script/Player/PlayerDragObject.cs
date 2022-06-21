@@ -26,6 +26,13 @@ public class PlayerDragObject : MonoBehaviour
 
     public void ReleaseObject()
     {
+        //if draged object is a bed type
+        if (rigidbodyDragged.TryGetComponent<Bed>(out Bed bed))
+        {
+            //set isTrigger to false
+            bed.SetTrigger(true);
+        }
+
         dragging = false;
         rigidbodyDragged.drag = defaultRigidBody.drag;
         rigidbodyDragged.bodyType = defaultRigidBody.bodyType;
@@ -47,6 +54,10 @@ public class PlayerDragObject : MonoBehaviour
             //drag
             defaultRigidBody.drag = rigidbodyDragged.drag;
             rigidbodyDragged.drag = 0;
+            if (value.TryGetComponent<Bed>(out Bed bed))
+            {
+                bed.SetTrigger(false);
+            }
         }
         else
         {

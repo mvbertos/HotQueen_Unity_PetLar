@@ -10,6 +10,7 @@ public class PlayerShortcuts : MonoBehaviour
     //PLAYER REFERENCES
     [SerializeField] private PlayerInputs playerInputs;
     [SerializeField] private PlayerMouse playerMouse;
+    [SerializeField] private AudioClip Clip_popAudio;
 
     //SCREEN REFERENCES
 
@@ -17,8 +18,14 @@ public class PlayerShortcuts : MonoBehaviour
     {
         playerInputs.OnSeventhShortcut += EnableMinigameScreen;
         playerInputs.OnEighthShortcut += EnableStoreScreen;
-        playerInputs.OnFirstShortcut += ChangeToolToGrab;
-        playerInputs.OnSecondShortcut += ChangeToolToTrigger;
+        playerInputs.OnSeventhShortcut += PopScreenAudio;
+        playerInputs.OnEighthShortcut += PopScreenAudio;
+    }
+
+    private void PopScreenAudio()
+    {
+        AudioPlayer audioPlayer = FindObjectOfType<AudioPlayer>();
+        audioPlayer.PlayAudio(Clip_popAudio, false);
     }
 
     private void EnableStoreScreen()

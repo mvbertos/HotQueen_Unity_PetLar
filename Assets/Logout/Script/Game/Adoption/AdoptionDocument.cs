@@ -12,7 +12,21 @@ public class AdoptionDocument : MonoBehaviour
     [SerializeField] private Canvas background;
     [SerializeField] private TMP_Text description;
     private PetData pet;
-    [HideInInspector] public bool Approved;
+    public PetData Pet
+    {
+        get
+        {
+            return pet;
+        }
+        set
+        {
+            pet = value;
+            perfil_pet.UpdateInfo(pet);
+        }
+    }
+    
+    [HideInInspector]
+    public bool Approved;
 
     private void Start()
     {

@@ -28,6 +28,10 @@ public class GameManager : MonoBehaviour
     public PetData[] PetData { get { return petData; } }
     private readonly String[] petNames = { "Alberto", "Samanta", "Poly", "Nino", "Amaterasu" }; //list of names to be used
 
+    //Sounds
+    [SerializeField] private AudioClip Clip_newCat;
+    [SerializeField] private AudioClip Clip_newDog;
+
     private void Awake()
     {
         if (instance == null)
@@ -68,6 +72,18 @@ public class GameManager : MonoBehaviour
         //add this to ong pets list
         ONG ong = GameObject.FindObjectOfType<ONG>();
         ong.AddPet(newpet);
+
+        AudioPlayer audioPlayer = FindObjectOfType<AudioPlayer>();
+        if (pet.GetData().isDog)
+        {
+            //if is a dog play dog sound
+            audioPlayer.PlayAudio(Clip_newDog, false);
+        }
+        else
+        {
+            //if is a cat play cat sound
+            audioPlayer.PlayAudio(Clip_newCat, false);
+        }
     }
 
     public void AddNewPetToWorld(PetData data)
@@ -80,6 +96,19 @@ public class GameManager : MonoBehaviour
         //add this to ong pets list
         ONG ong = GameObject.FindObjectOfType<ONG>();
         ong.AddPet(newpet);
+
+
+        AudioPlayer audioPlayer = FindObjectOfType<AudioPlayer>();
+        if (data.isDog)
+        {
+            //if is a dog play dog sound
+            audioPlayer.PlayAudio(Clip_newDog, false);
+        }
+        else
+        {
+            //if is a cat play cat sound
+            audioPlayer.PlayAudio(Clip_newCat, false);
+        }
     }
 
     public void RemovePetToWorld(PetData pet)
@@ -124,6 +153,19 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene(scene, LoadSceneMode.Additive);
 
         }
+
+
+    }
+
+    private void UpdateSceneMusic(string scene)
+    {
+        //find object of type AudioPlayer
+        //play a new music
+        AudioPlayer audioPlayer = FindObjectOfType<AudioPlayer>();
+        if (audioPlayer != null)
+        {
+            audioPlayer.PlaySceneMusic(scene);
+        }
     }
 
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
@@ -133,6 +175,7 @@ public class GameManager : MonoBehaviour
             ONG ong = GameObject.FindObjectOfType<ONG>();
             ong.AddPetDatasInWorld();
         }
+        UpdateSceneMusic(sceneLoaded);
     }
 
     public void UnloadScene(String scene)

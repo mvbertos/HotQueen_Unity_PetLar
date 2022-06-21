@@ -96,6 +96,7 @@ public class Donation : Event
         //increase ong money
         ONG ong = GameObject.FindObjectOfType<ONG>();
         ong.Money += PriceValue;
+
     }
 }
 

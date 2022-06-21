@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,5 +20,15 @@ public class Bed : MonoBehaviour
 
         //create a timer to enable AI movement again after useTime
         TimerEvent.Create(() => { pet.EnableColliders(); pet.EnableAI(); pet.SpriteRenderer.sortingOrder -= 1; }, useTime);
+    }
+
+    public void SetTrigger(bool value)
+    {
+        //for each collider child of this gameobject
+        //set isTrigger to true
+        foreach (Collider2D collider in GetComponentsInChildren<Collider2D>())
+        {
+            collider.isTrigger = value;
+        }
     }
 }

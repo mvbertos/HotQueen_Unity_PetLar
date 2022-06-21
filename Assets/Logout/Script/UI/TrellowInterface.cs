@@ -24,15 +24,21 @@ public class TrellowInterface : MonoBehaviour
             RefTime = 0f;
         }
     }
+    //AUDIO
+    [SerializeField] private AudioClip completedClip;
 
+    //TASKS
     private List<Event> taskEvents = new List<Event>();
     private List<TrellowTask> tasksToExecute = new List<TrellowTask>();
     Dictionary<Event, TaskButton> taskButtonInstances = new Dictionary<Event, TaskButton>();
+    //TASK PARENTS
     [SerializeField] private TaskButton buttonRef;
     [SerializeField] private Transform content;
     [SerializeField] private Transform todo;
     [SerializeField] private Transform doing;
     [SerializeField] private Transform done;
+
+    //CALLBACKS
     private Action OnUpdate;
 
     private void Start()
@@ -187,6 +193,7 @@ public class TrellowInterface : MonoBehaviour
             //update slider
             slider.value = value;
             task.Event.ConfirmEvent();
+            CompletedAudio();
 
             if (slider.value <= 0)
             {
@@ -196,8 +203,19 @@ public class TrellowInterface : MonoBehaviour
         else
         {
             task.Event.ConfirmEvent();
+            CompletedAudio();
             RemoveTask(task);
         }
 
+    }
+    private void CompletedAudio()
+    {
+        //find object of type audio player in the scene
+        //play a new sound
+        AudioPlayer audioPlayer = GameObject.FindObjectOfType<AudioPlayer>();
+        if (audioPlayer != null)
+        {
+            audioPlayer.PlayAudio(completedClip,false);
+        }
     }
 }

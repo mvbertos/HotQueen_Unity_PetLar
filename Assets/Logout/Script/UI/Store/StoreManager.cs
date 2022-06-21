@@ -23,6 +23,8 @@ public class StoreManager : MonoBehaviour
     //BUY
     [SerializeField] private Button buyButton;
     [SerializeField] private GameObject moreAbout;
+    //AUDIO
+    [SerializeField] private AudioClip buySound;
 
     private void Start()
     {
@@ -129,6 +131,10 @@ public class StoreManager : MonoBehaviour
                 PlayerDragObject playerDragObject = FindObjectOfType<PlayerDragObject>();
                 playerDragObject.GrabObject(instance.GetComponent<Rigidbody2D>());
             }
+            //find audioplayer and set it to buy sound
+            //play sound
+            AudioPlayer audioPlayer = FindObjectOfType<AudioPlayer>();
+            audioPlayer.PlayAudio(buySound, false);
             Hide();
         }
     }

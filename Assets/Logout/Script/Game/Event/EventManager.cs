@@ -8,6 +8,7 @@ public class EventManager : MonoBehaviour
 
     List<Event> events = new List<Event>();
     public EventInterfaceManager eventInterface;
+    [SerializeField] private AudioClip Clip_popAudio;
 
     private void Start()
     {
@@ -61,6 +62,10 @@ public class EventManager : MonoBehaviour
                 TimerEvent.Create(() =>
                 {
                     eventInterface.Enable(rand_event.EventDescription, rand_event.EventSprite, () => { rand_event.ConfirmEvent(); RemoveEvent(rand_event); }, () => { rand_event.DeclineEvent(); RemoveEvent(rand_event); });
+                    //find object of type AudioPlayer
+                    //play audio
+                    AudioPlayer audioPlayer = FindObjectOfType<AudioPlayer>();
+                    audioPlayer.PlayAudio(Clip_popAudio, false);
                 }, rand_time);
                 break;
             }

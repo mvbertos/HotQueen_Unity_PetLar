@@ -97,8 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInputs: {fileID: 1959693303336507111}
   playerMouse: {fileID: 1959693303336507106}
-  trellowInterface: {fileID: 0}
-  storeInterface: {fileID: 0}
+  Clip_popAudio: {fileID: 8300000, guid: 8d54a1fb5b693304aadb78032dbd5c49, type: 3}
 --- !u!114 &1959693303336507129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,3 +160,5 @@ MonoBehaviour:
   mouseState: 0
   playerInputs: {fileID: 1959693303336507111}
   playerDragObject: {fileID: 1959693303336507129}
+  mouseClick: {fileID: 8300000, guid: 2b91ebdee94175c41a32864d8c77cf93, type: 3}
+  mouseUp: {fileID: 8300000, guid: 50884f8a9ed5fe04a85b5fae9651f79a, type: 3}
