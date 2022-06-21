@@ -19,16 +19,10 @@ public class AdoptionDocument : MonoBehaviour
         QuitButton.onClick.AddListener(delegate { Destroy(this.gameObject); });
     }
 
-
     private void OnEnable()
     {
         //SETUP MINIGAME
         InitMinigame();
-    }
-
-    private void OnDisable()
-    {
-        GameManager.SwitchToLastScene();
     }
 
     /// <summary>
@@ -65,7 +59,7 @@ public class AdoptionDocument : MonoBehaviour
         //remove it from world
         ONG ong = GameObject.FindObjectOfType<ONG>();
         ong.RemovePet(pet);
-        GameManager.SwitchToLastScene();
+        GameManager.instance.SwitchToLastScene();
     }
 
     /// <summary>
@@ -73,6 +67,6 @@ public class AdoptionDocument : MonoBehaviour
     /// </summary>
     public void Reject()
     {
-        GameManager.SwitchToLastScene();
+        GameManager.instance.SwitchToLastScene();
     }
 }

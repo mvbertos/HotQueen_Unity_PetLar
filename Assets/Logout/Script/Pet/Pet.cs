@@ -11,8 +11,9 @@ public class Pet : MonoBehaviour
     [SerializeField] private InformationDisplayer informationDisplayer;
     [SerializeField] private AIMovimentation movement;
     [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private Animator animator;
     public SpriteRenderer SpriteRenderer { get { return spriteRenderer; } }
-    [SerializeField] private Collider2D[] colliders;
+    private Collider2D[] colliders;
 
 
     //pet status
@@ -28,6 +29,14 @@ public class Pet : MonoBehaviour
         informationDisplayer.UpdateInformation(data.Name, 100);
         state = PetState.Idle;
         InitStatus();
+        InitGraphics();
+    }
+
+    private void InitGraphics()
+    {
+        //set sprite renderer as data picture
+        spriteRenderer.sprite = data.Picture;
+        animator.SetInteger("Type", (int)data.specie);
     }
 
     //pet 
@@ -43,6 +52,7 @@ public class Pet : MonoBehaviour
     public void SetData(PetData petData)
     {
         data = petData;
+        InitGraphics();
     }
 
     public void SetStatus(PetStatus status)
@@ -75,6 +85,7 @@ public class Pet : MonoBehaviour
     public void DisableColliders()
     {
         //get all colliders in child and disable them
+        colliders = this.gameObject.GetComponentsInChildren<Collider2D>();
         foreach (Collider2D collider in colliders)
         {
             collider.enabled = false;
@@ -84,6 +95,7 @@ public class Pet : MonoBehaviour
     public void EnableColliders()
     {
         //get all colliders in child and disable them
+        colliders = this.gameObject.GetComponentsInChildren<Collider2D>();
         foreach (Collider2D collider in colliders)
         {
             collider.enabled = true;

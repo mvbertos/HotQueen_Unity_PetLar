@@ -7,6 +7,6 @@ public class MainScreen : MonoBehaviour
 {
     public void StartGame()
     {
-        GameManager.SwitchScene("GameScene", 1);
+        GameManager.instance.SwitchScene(GameManager.instance.SceneName.Game, 1);
     }
 }

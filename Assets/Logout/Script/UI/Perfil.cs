@@ -58,6 +58,9 @@ public class PetData : EntityData
 public enum Species
 {
     DEFAULT = 0,
-    POODLE = 1,
-    GOLDENRETRIVER = 2,
+    OrangeCat = 1,
+    GrayCat = 2,
+    BlackDog = 3,
+    BrownDog = 4,
+    DarkBrownDog = 5,
 }

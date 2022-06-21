@@ -31,16 +31,16 @@ public class Event
 /// </summary>
 public class Rescue : Event
 {
-    private Pet randomPet = null;
+    private PetData randomPet = null;
     public Rescue()
     {
         //get ong component in scene
         //get pets in list pets
         //get random pet from list pets
 
-        randomPet = GameManager.instance.PetReferences[Random.Range(0, GameManager.instance.PetReferences.Length)];
+        randomPet = GameManager.instance.PetData[Random.Range(0, GameManager.instance.PetData.Length)];
         //Set event_sprite as it´s appearance
-        EventSprite = randomPet.GetData().Picture;
+        EventSprite = randomPet.Picture;
         //set name
         EventName = "Pet Rescue";
         //Set Description
@@ -51,8 +51,7 @@ public class Rescue : Event
 
     public override void ConfirmEvent()
     {
-        GameManager.AddNewPetToWorld(randomPet);
-
+        GameManager.instance.AddNewPetToWorld(randomPet);
     }
 
     public override void DeclineEvent()
@@ -109,8 +108,9 @@ public class Adoption : Event
         EventDescription = "Doe um bixinho resgatado!";
         TimeRange = new Vector2(1, 2);
     }
+
     public override void ConfirmEvent()
     {
-        GameManager.SwitchScene("MG_AdoptionScene");
+        GameManager.instance.SwitchScene(GameManager.instance.SceneName.Adoption);
     }
 }

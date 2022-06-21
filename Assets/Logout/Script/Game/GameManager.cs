@@ -9,13 +9,24 @@ using System.Linq;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    private static string lastSceneLoaded;
-    private static string sceneLoaded;
+
+    //DEBUG
+    public bool DEBUG_MODE = false;
+
+    //SCENE
+    private string lastSceneLoaded;
+    private string sceneLoaded;
+    [SerializeField] private ScenesNames sceneName;
+    public ScenesNames SceneName
+    {
+        get { return sceneName; }
+    }
 
     //PET THINGS
-    [SerializeField] private Pet[] petReferences;//filled with prefabs
-    public Pet[] PetReferences { get { return petReferences; } }
-    private static readonly String[] petNames = { "Alberto", "Samanta", "Poly", "Nino", "Amaterasu" }; //list of names to be used
+    [SerializeField] private Pet petReference;//filled with prefabs
+    [SerializeField] private PetData[] petData;
+    public PetData[] PetData { get { return petData; } }
+    private readonly String[] petNames = { "Alberto", "Samanta", "Poly", "Nino", "Amaterasu" }; //list of names to be used
 
     private void Awake()
     {
@@ -35,9 +46,20 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    void Update()
+    {
+        if (DEBUG_MODE)
+        {
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                EventManager eventManager = FindObjectOfType<EventManager>();
+                eventManager.ForceRescueMinigame();
+            }
+        }
+    }
 
     //Pets
-    public static void AddNewPetToWorld(Pet pet)
+    public void AddNewPetToWorld(Pet pet)
     {
         //instantiate pet in world
         Pet newpet = Instantiate<Pet>(pet, SceneManager.GetSceneByName("GameScene").GetRootGameObjects()[0].transform);
@@ -46,10 +68,21 @@ public class GameManager : MonoBehaviour
         //add this to ong pets list
         ONG ong = GameObject.FindObjectOfType<ONG>();
         ong.AddPet(newpet);
-
     }
 
-    public static void RemovePetToWorld(PetData pet)
+    public void AddNewPetToWorld(PetData data)
+    {
+        //instantiate pet in world
+        Pet newpet = Instantiate<Pet>(petReference, SceneManager.GetSceneByName("GameScene").GetRootGameObjects()[0].transform);
+        newpet.SetData(data);
+        newpet.ChangeName(petNames[Random.Range(0, petNames.Length)]);
+
+        //add this to ong pets list
+        ONG ong = GameObject.FindObjectOfType<ONG>();
+        ong.AddPet(newpet);
+    }
+
+    public void RemovePetToWorld(PetData pet)
     {
         //remove pet from ong list
         Pet[] pets = GameObject.FindObjectsOfType<Pet>();
@@ -62,13 +95,13 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-    public static void RemovePetToWorld(Pet pet)
+    public void RemovePetToWorld(Pet pet)
     {
         //remove pet from ong list
         RemovePetToWorld(pet.GetData());
     }
 
-    public static void GameOver()
+    public void GameOver()
     {
         ONG ong = GameObject.FindObjectOfType<ONG>();
         if (ong.Money <= 0)
@@ -78,7 +111,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public static void LoadScene(String scene, int mode = 1)
+    public void LoadScene(String scene, int mode = 1)
     {
         sceneLoaded = scene;
         TimerEvent.StopAll();
@@ -93,7 +126,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private static void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
+    private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
         if (arg0.name == "GameScene")
         {
@@ -102,20 +135,28 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public static void UnloadScene(String scene)
+    public void UnloadScene(String scene)
     {
         lastSceneLoaded = sceneLoaded;
         SceneManager.UnloadSceneAsync(scene);
     }
 
-    public static void SwitchScene(String scene, int mode = 1)
+    public void SwitchScene(String scene, int mode = 1)
     {
         UnloadScene(sceneLoaded);
         LoadScene(scene, mode);
     }
 
-    public static void SwitchToLastScene()
+    public void SwitchToLastScene()
     {
+
         SwitchScene(lastSceneLoaded);
     }
+}
+[System.Serializable]
+public class ScenesNames
+{
+    public string Game = "GameScene";
+    public string StartMenu = "StartMenuScene";
+    public string Adoption = "AdoptionScene";
 }

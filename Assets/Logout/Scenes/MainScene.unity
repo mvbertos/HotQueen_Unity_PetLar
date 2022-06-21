@@ -221,9 +221,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04dea32ca7ac8644aa47c5669a0a9133, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  petReferences:
-  - {fileID: 8393315315492749837, guid: e101fc57c6d4b544780b179c98eac35c, type: 3}
-  - {fileID: 8393315315492749837, guid: 9ec684170b9e4774d9dace5de2f363e6, type: 3}
+  petReference: {fileID: 843357897, guid: 68c3f92be8c5db845a873964febe4dd8, type: 3}
+  petData:
+  - Name: 
+    Picture: {fileID: -9053079236694163733, guid: 388de3f7d5da91e45b4ab16176943ab5,
+      type: 3}
+    Personality: 0
+    specie: 0
+  - Name: 
+    Picture: {fileID: 6095757730305166882, guid: 388de3f7d5da91e45b4ab16176943ab5,
+      type: 3}
+    Personality: 0
+    specie: 5
+  - Name: 
+    Picture: {fileID: -1057955469018849896, guid: 388de3f7d5da91e45b4ab16176943ab5,
+      type: 3}
+    Personality: 0
+    specie: 3
+  - Name: 
+    Picture: {fileID: -5515916423720039786, guid: 388de3f7d5da91e45b4ab16176943ab5,
+      type: 3}
+    Personality: 0
+    specie: 2
+  - Name: 
+    Picture: {fileID: 21300000, guid: c47e5b4767c46b64b8ff6b77949c7227, type: 3}
+    Personality: 0
+    specie: 1
+  - Name: 
+    Picture: {fileID: 21300000, guid: 8877ab5e43aee594382eefb271192ddb, type: 3}
+    Personality: 0
+    specie: 4
 --- !u!4 &1708313221
 Transform:
   m_ObjectHideFlags: 0

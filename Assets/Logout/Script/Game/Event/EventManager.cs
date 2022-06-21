@@ -73,4 +73,9 @@ public class EventManager : MonoBehaviour
         Adoption adoption = new Adoption();
         adoption.ConfirmEvent();
     }
+    public void ForceRescueMinigame()
+    {
+        Rescue rescue = new Rescue();
+        rescue.ConfirmEvent();
+    }
 }

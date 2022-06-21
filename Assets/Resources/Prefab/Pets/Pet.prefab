@@ -269,7 +269,7 @@ MonoBehaviour:
   informationDisplayer: {fileID: 4979509058417092103}
   movement: {fileID: 6723969952448166849}
   spriteRenderer: {fileID: 1736755808706651631}
-  colliders: []
+  animator: {fileID: 1052108182584041646}
   state: 0
 --- !u!114 &6164205618652383934
 MonoBehaviour:
@@ -908,8 +908,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7554626425990309412}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalPosition: {x: 0, y: -0.63, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 41245127816401549}
   m_RootOrder: 2
@@ -959,9 +959,9 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.32, y: 1.63}
+  m_Size: {x: 2.6, y: 1.62}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0

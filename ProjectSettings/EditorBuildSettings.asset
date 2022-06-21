@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Logout/Scenes/GameScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Logout/Scenes/MG_AdoptionScene.unity
+    path: Assets/Logout/Scenes/AdoptionScene.unity
     guid: c292e14ebeaa2c64bbc52cd0ad7ae90e
   m_configObjects: {}
