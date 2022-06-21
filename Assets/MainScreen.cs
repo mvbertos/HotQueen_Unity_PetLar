@@ -9,4 +9,8 @@ public class MainScreen : MonoBehaviour
     {
         GameManager.instance.SwitchScene(GameManager.instance.SceneName.Game, 1);
     }
+    public void GoToWeb()
+    {
+        Application.OpenURL("https://hotqueen.itch.io/pethome");
+    }
 }
